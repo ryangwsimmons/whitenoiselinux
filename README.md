@@ -3,8 +3,8 @@ A Linux application written using PyQt5 to play white noise audio files in the b
 
 ## Screenshots
 <p float="left">
-    <img src="screenshots/main.png?raw=true" width="500">
-    <img src="screenshots/about.png?raw=true" width="500">
+    <img src="screenshots/main.png?raw=true" width="400">
+    <img src="screenshots/about.png?raw=true" width="400">
 </p>
 
 ## Installation
