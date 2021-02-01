@@ -1,0 +1,5 @@
+fbs==0.9.0
+PyQt5==5.9.2
+dataclasses==0.8
+audio-metadata==0.11.1
+pygame==2.0.1

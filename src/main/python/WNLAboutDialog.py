@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QLabel)
 from PyQt5.QtCore import Qt
+from PyQt5.QtSvg import QSvgWidget
 
 class WNLAboutDialog(QDialog):
     def __init__(self, appctxt, *args, **kwargs):
@@ -9,15 +10,18 @@ class WNLAboutDialog(QDialog):
         self.setWindowTitle("About White Noise Linux")
 
         # Set the fixed size of the about dialog
-        self.setFixedSize(300, 200)
+        self.setFixedSize(300, 300)
 
         # Create main layout for about dialog
         self.mainLayout = QVBoxLayout()
         self.mainLayout.setAlignment(Qt.AlignCenter)
 
         # Create elements for about dialog layout
+        self.logo = QSvgWidget(appctxt.get_resource("logo.svg"))
+        self.logo.setFixedSize(125, 154)
         self.titleLabel = QLabel("<b>White Noise Linux</b>")
         self.titleLabel.setAlignment(Qt.AlignCenter)
+        self.titleLabel.setContentsMargins(0, 20, 0, 0)
         self.versionLabel = QLabel("Version " + appctxt.build_settings['version'])
         self.versionLabel.setAlignment(Qt.AlignCenter)
         self.authorLabel = QLabel("By Ryan Simmons")
@@ -25,6 +29,7 @@ class WNLAboutDialog(QDialog):
         self.authorLabel.setContentsMargins(0, 5, 0, 0)
 
         # Add elements to about dialog layout
+        self.mainLayout.addWidget(self.logo)
         self.mainLayout.addWidget(self.titleLabel)
         self.mainLayout.addWidget(self.versionLabel)
         self.mainLayout.addWidget(self.authorLabel)

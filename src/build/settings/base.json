@@ -1,6 +1,6 @@
 {
-    "app_name": "WhiteNoiseLinux",
+    "app_name": "White Noise Linux",
     "author": "Ryan Simmons",
     "main_module": "src/main/python/main.py",
-    "version": "0.1"
+    "version": "1.0"
 }
