@@ -14,7 +14,7 @@ class WNLMainWindow(QMainWindow):
         self.appctxt = appctxt
 
         # Set window and application title
-        self.setWindowTitle("White Noise Linux")
+        self.setWindowTitle("WhiteNoiseLinux")
 
         # Set default main window size
         self.resize(800, 600)

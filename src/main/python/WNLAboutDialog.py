@@ -7,7 +7,7 @@ class WNLAboutDialog(QDialog):
         super().__init__(*args, **kwargs)
 
         # Set the title of the about dialog
-        self.setWindowTitle("About White Noise Linux")
+        self.setWindowTitle("About " + appctxt.build_settings["app_name"])
 
         # Set the fixed size of the about dialog
         self.setFixedSize(300, 300)
@@ -19,10 +19,10 @@ class WNLAboutDialog(QDialog):
         # Create elements for about dialog layout
         self.logo = QSvgWidget(appctxt.get_resource("logo.svg"))
         self.logo.setFixedSize(125, 154)
-        self.titleLabel = QLabel("<b>White Noise Linux</b>")
+        self.titleLabel = QLabel("<b>" + appctxt.build_settings["app_name"] + "</b>")
         self.titleLabel.setAlignment(Qt.AlignCenter)
         self.titleLabel.setContentsMargins(0, 20, 0, 0)
-        self.versionLabel = QLabel("Version " + appctxt.build_settings['version'])
+        self.versionLabel = QLabel("Version " + appctxt.build_settings["version"])
         self.versionLabel.setAlignment(Qt.AlignCenter)
         self.authorLabel = QLabel("By Ryan Simmons")
         self.authorLabel.setAlignment(Qt.AlignCenter)
