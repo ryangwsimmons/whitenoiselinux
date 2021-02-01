@@ -7,6 +7,20 @@ A Linux application written using PyQt5 to play white noise audio files in the b
     <img src="screenshots/about.png?raw=true" width="400">
 </p>
 
+## Usage
+On first run, the app creates a `.whitenoiselinux` directory in your home directory. Inside this directory, there is another directory called `sounds`.
+
+Inside this directory, place the sounds you want. These sounds must be OGG audio files. If an audio file has a title in its metadata, this title will be used instead of the file name in the interface.
+
+To obtain sounds, I'd recommend the following process:
+
+1. Go on YouTube, and search for "white noise".
+2. Find a few different sounds you like, and download the audio for them with [youtube-dl](https://youtube-dl.org/).
+3. Use [Audacity](https://www.audacityteam.org/) to trim the audio file down to around 2 minutes or so.
+4. Export this new, trimmed audio as an OGG file.
+5. During the export process, you will be given the option to enter a "Track Title" for the file. You can enter the name you would like for the sound in this field.
+6. Save this audio file in the `~/.whitenoiselinux/sounds` directory.
+
 ## Installation
 ### Distro Packages (Recommended)
 Use the latest provided package for your distro, available on the [releases](https://github.com/ryangwsimmons/WhiteNoiseLinux/releases) page.
