@@ -54,7 +54,7 @@ This project makes use of [FBS](https://build-system.fman.io/), so in order to c
 
 This will create an executable in the `target` folder. You can move this executable anywhere you want on your system, and it should work.
 
-## Attribution
+## Attributions
 The following images were used to create the icon for this app:
 - [Tux-flat.svg](https://commons.wikimedia.org/wiki/File:Tux-flat.svg) by Josef Norlin (Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode))
 - [Icon of black headphones](https://commons.wikimedia.org/wiki/File:Headphones_icon.svg) by Marek Mazurkiewicz (Licensed under [CC0 1.0](https://commons.wikimedia.org/wiki/File:Headphones_icon.svg))
