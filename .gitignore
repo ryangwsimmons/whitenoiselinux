@@ -1,5 +1,0 @@
-.pylintrc
-.vscode
-src/main/python/__pycache__
-venv
-target
