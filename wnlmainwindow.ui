@@ -28,32 +28,21 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <widget class="QFrame" name="topBarFrame">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::RightToLeft</enum>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
+     <widget class="QWidget" name="topBarWidget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
+       <item>
+        <spacer name="topBarSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>736</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <widget class="QPushButton" name="aboutButton">
          <property name="sizePolicy">
@@ -89,31 +78,12 @@
          </property>
         </widget>
        </item>
-       <item>
-        <spacer name="topBarSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
       </layout>
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="soundSelectionFrame">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
+     <widget class="QWidget" name="soundSelectionWidget" native="true">
+      <layout class="QGridLayout" name="gridLayout">
        <property name="topMargin">
         <number>0</number>
        </property>
@@ -121,13 +91,7 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="QFrame" name="availSoundsFrame">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
+        <widget class="QWidget" name="availSoundsWidget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="topMargin">
            <number>0</number>
@@ -153,13 +117,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QFrame" name="moveSoundsFrame">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
+        <widget class="QWidget" name="moveSoundsWidget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <spacer name="moveSoundsTopSpacer">
@@ -169,7 +127,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>192</height>
              </size>
             </property>
            </spacer>
@@ -201,7 +159,8 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset theme="go-next"/>
+             <iconset theme="go-next">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
@@ -232,7 +191,8 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset theme="go-previous"/>
+             <iconset theme="go-previous">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
@@ -244,7 +204,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>192</height>
              </size>
             </property>
            </spacer>
@@ -253,13 +213,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QFrame" name="currSoundsFrame">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
+        <widget class="QWidget" name="currSoundsWidget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="topMargin">
            <number>0</number>
@@ -288,13 +242,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="mediaControlsFrame">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
+     <widget class="QWidget" name="mediaControlsWidget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <spacer name="mediaControlsLeftSpacer">
@@ -303,7 +251,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>354</width>
            <height>20</height>
           </size>
          </property>
@@ -336,7 +284,8 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="media-playback-start"/>
+          <iconset theme="media-playback-start">
+           <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>
@@ -347,7 +296,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>354</width>
            <height>20</height>
           </size>
          </property>
