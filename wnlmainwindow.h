@@ -1,9 +1,16 @@
 #ifndef WNLMAINWINDOW_H
 #define WNLMAINWINDOW_H
 
+#include <QtConcurrent/QtConcurrent>
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QListWidget>
+#include <QListWidgetItem>
 #include <QMainWindow>
+#include <QVariant>
 
 #include "wnlaboutdialog.h"
+#include "wnlsoundgrabber.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class WNLMainWindow; }

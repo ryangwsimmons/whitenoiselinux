@@ -3,6 +3,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+CONFIG += console
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -17,11 +18,13 @@ DEFINES += "VERSION_MAJOR=$$VERSION_MAJOR"\
 SOURCES += \
     main.cpp \
     wnlaboutdialog.cpp \
-    wnlmainwindow.cpp
+    wnlmainwindow.cpp \
+    wnlsoundgrabber.cpp
 
 HEADERS += \
     wnlaboutdialog.h \
-    wnlmainwindow.h
+    wnlmainwindow.h \
+    wnlsoundgrabber.h
 
 FORMS += \
     wnlaboutdialog.ui \
@@ -34,3 +37,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources_WhiteNoiseLinux.qrc
+
+unix|win32: LIBS += -ltag
+
+DISTFILES += \
+    WhiteNoiseLinux.supp

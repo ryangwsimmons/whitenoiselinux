@@ -1,0 +1,24 @@
+{
+   malloc[Memcheck:Leak]
+   Memcheck:Leak
+   fun:malloc
+   fun:_ZN14QObjectPrivate13addConnectionEiPNS_10ConnectionE
+   obj:/usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.2
+   fun:_ZN7QObject7connectEPKS_PKcS1_S3_N2Qt14ConnectionTypeE
+   obj:/usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.2
+   fun:_ZN16Ui_WNLMainWindow7setupUiEP11QMainWindow
+   fun:_ZN13WNLMainWindowC1EP7QWidget
+   fun:main
+}
+{
+   malloc[Memcheck:Leak]
+   Memcheck:Leak
+   fun:malloc
+   fun:_ZN14QObjectPrivate13addConnectionEiPNS_10ConnectionE
+   obj:/usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.2
+   fun:_ZN7QObject7connectEPKS_PKcS1_S3_N2Qt14ConnectionTypeE
+   obj:/usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.2
+   fun:_ZN16Ui_WNLMainWindow7setupUiEP11QMainWindow
+   fun:_ZN13WNLMainWindowC1EP7QWidget
+   fun:main
+}
