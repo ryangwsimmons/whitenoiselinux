@@ -27,6 +27,14 @@ public:
 private slots:
     void on_aboutButton_clicked();
 
+    void on_addSoundButton_clicked();
+
+    void on_rmSoundButton_clicked();
+
+    void on_currSoundsSelect_itemSelectionChanged();
+
+    void on_availSoundsSelect_itemSelectionChanged();
+
 private:
     Ui::WNLMainWindow *ui;
 };

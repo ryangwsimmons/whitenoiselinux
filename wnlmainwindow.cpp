@@ -46,3 +46,63 @@ void WNLMainWindow::on_aboutButton_clicked()
     // Show the dialog (modal)
     aboutDialog->exec();
 }
+
+void WNLMainWindow::on_addSoundButton_clicked()
+{
+    // Get pointers to both lists
+    QListWidget* availSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively);
+    QListWidget* currSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively);
+
+    // Move all selected sounds to the "currently playing" list
+    for (QModelIndex selectedIndex : availSoundsSelect->selectionModel()->selectedIndexes())
+    {
+        // Remove item from the available sounds list
+        QListWidgetItem* selectedItem = availSoundsSelect->takeItem(selectedIndex.row());
+
+        // Add the item to the currently playing list
+        currSoundsSelect->addItem(selectedItem);
+    }
+}
+
+void WNLMainWindow::on_rmSoundButton_clicked()
+{
+    // Get pointers to both lists
+    QListWidget* currSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively);
+    QListWidget* availSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively);
+
+    // Move all selected sounds to the "available sounds" list
+    for (QModelIndex selectedIndex : currSoundsSelect->selectionModel()->selectedIndexes())
+    {
+        // Remove item from the currently playing list
+        QListWidgetItem* selectedItem = currSoundsSelect->takeItem(selectedIndex.row());
+
+        // Add the item to the available sounds list
+        availSoundsSelect->addItem(selectedItem);
+    }
+}
+
+void WNLMainWindow::on_currSoundsSelect_itemSelectionChanged()
+{
+    // If the number of items selected in the list is greater than 0, enable the button for moving sounds back to the available list
+    if (ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively)->selectedItems().count() > 0)
+    {
+        ui->soundSelectionWidget->findChild<QPushButton *>("rmSoundButton", Qt::FindChildrenRecursively)->setEnabled(true);
+    }
+    else // Otherwise, disable it
+    {
+        ui->soundSelectionWidget->findChild<QPushButton *>("rmSoundButton", Qt::FindChildrenRecursively)->setEnabled(false);
+    }
+}
+
+void WNLMainWindow::on_availSoundsSelect_itemSelectionChanged()
+{
+    // If the number of items selected in the list is greater than 0, enable the button for moving sounds to the currently playing list
+    if (ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively)->selectedItems().count() > 0)
+    {
+        ui->soundSelectionWidget->findChild<QPushButton *>("addSoundButton", Qt::FindChildrenRecursively)->setEnabled(true);
+    }
+    else // Otherwise, disable it
+    {
+        ui->soundSelectionWidget->findChild<QPushButton *>("addSoundButton", Qt::FindChildrenRecursively)->setEnabled(false);
+    }
+}
