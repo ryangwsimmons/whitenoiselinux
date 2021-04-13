@@ -9,24 +9,15 @@
 #include <taglib/vorbisfile.h>
 #include <taglib/xiphcomment.h>
 
-// Define a struct for storing sounds
-struct WNLSound
-{
-    QString name;
-    QString fileName;
-};
-Q_DECLARE_METATYPE(WNLSound)
+#include "wnlsound.h"
 
 class WNLSoundGrabber
 {
 public:
-    // Declare a vector of sounds for storing all sounds the program detects on startup
-    QVector<WNLSound> sounds;
-
     WNLSoundGrabber();
 
     // Declare a method for getting information on the sounds in the sound folder
-    void getSounds();
+    QVector<WNLSound> getSounds();
 };
 
 #endif // WNLSOUNDGRABBER_H

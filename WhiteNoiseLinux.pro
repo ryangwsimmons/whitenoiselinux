@@ -19,11 +19,14 @@ SOURCES += \
     main.cpp \
     wnlaboutdialog.cpp \
     wnlmainwindow.cpp \
+    wnlplaybackmanager.cpp \
     wnlsoundgrabber.cpp
 
 HEADERS += \
     wnlaboutdialog.h \
     wnlmainwindow.h \
+    wnlplaybackmanager.h \
+    wnlsound.h \
     wnlsoundgrabber.h
 
 FORMS += \
@@ -42,3 +45,7 @@ unix|win32: LIBS += -ltag
 
 DISTFILES += \
     WhiteNoiseLinux.supp
+
+unix|win32: LIBS += -lportaudio
+
+unix|win32: LIBS += -lsndfile

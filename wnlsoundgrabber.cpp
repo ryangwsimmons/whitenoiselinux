@@ -7,18 +7,21 @@ WNLSoundGrabber::WNLSoundGrabber()
 
 }
 
-void WNLSoundGrabber::getSounds()
+QVector<WNLSound> WNLSoundGrabber::getSounds()
 {
     // Create the sounds directory if it does not yet exist
     QString soundsPath(QDir::homePath() + QDir::separator() + ".whitenoiselinux" + QDir::separator() + "sounds");
     if (!QDir::home().mkpath(soundsPath))
     {
         qDebug() << "Unable to create sounds directory structure, do you have write permissions in your home folder?";
-        return;
+        return QVector<WNLSound>();
     }
 
     // Create a QDir object to represent the sounds directory
     QDir soundsDir(soundsPath);
+
+    // Create a QVector to hold the list of sounds
+    QVector<WNLSound> sounds;
 
     //Iterate over each file in the folder, getting its name and creating a structure for it, adding that structure to the vector
     QStringList soundFiles = soundsDir.entryList();
@@ -50,7 +53,9 @@ void WNLSoundGrabber::getSounds()
             WNLSound sound = {soundTitle, soundsDir.absoluteFilePath(soundFilePath)};
 
             // Append the struct to the sounds vector
-            this->sounds.append(sound);
+            sounds.append(sound);
         }
     }
+
+    return sounds;
 }

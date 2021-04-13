@@ -8,21 +8,20 @@ WNLMainWindow::WNLMainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // Get the sounds from disk
-    WNLSoundGrabber* soundGrabber = new WNLSoundGrabber;
-    QFuture<void> soundsFuture = QtConcurrent::run(soundGrabber, &WNLSoundGrabber::getSounds);
+    WNLSoundGrabber soundGrabber;
+    QFuture<QVector<WNLSound>> soundsFuture = QtConcurrent::run(soundGrabber, &WNLSoundGrabber::getSounds);
 
-    QFutureWatcher<void>* soundsFutureWatcher = new QFutureWatcher<void>;
-    connect(soundsFutureWatcher, &QFutureWatcher<void>::finished, [=]()
+    QFutureWatcher<QVector<WNLSound>>* soundsFutureWatcher = new QFutureWatcher<QVector<WNLSound>>;
+    connect(soundsFutureWatcher, &QFutureWatcher<QVector<WNLSound>>::finished, [=]()
     {
         // Once the available sounds have been read from disk, add them to the available sounds widget
-        for (WNLSound sound : soundGrabber->sounds)
+        for (WNLSound sound : soundsFutureWatcher->result())
         {
             QListWidgetItem* soundItem = new QListWidgetItem(sound.name);
             soundItem->setData(Qt::UserRole, QVariant::fromValue<WNLSound>(sound));
             ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively)->addItem(soundItem);
         }
 
-        delete soundGrabber;
         delete soundsFutureWatcher;
     });
     soundsFutureWatcher->setFuture(soundsFuture);
@@ -61,6 +60,9 @@ void WNLMainWindow::on_addSoundButton_clicked()
 
         // Add the item to the currently playing list
         currSoundsSelect->addItem(selectedItem);
+
+        // Open the sound and add it to the list of currently playing sounds
+        this->playbackManager.addSound(selectedItem->data(Qt::UserRole).value<WNLSound>());
     }
 }
 
@@ -78,6 +80,9 @@ void WNLMainWindow::on_rmSoundButton_clicked()
 
         // Add the item to the available sounds list
         availSoundsSelect->addItem(selectedItem);
+
+        // Remove the sound from the playback manager
+        this->playbackManager.rmSound(selectedIndex.row());
     }
 }
 
@@ -104,5 +109,26 @@ void WNLMainWindow::on_availSoundsSelect_itemSelectionChanged()
     else // Otherwise, disable it
     {
         ui->soundSelectionWidget->findChild<QPushButton *>("addSoundButton", Qt::FindChildrenRecursively)->setEnabled(false);
+    }
+}
+
+void WNLMainWindow::on_playPauseButton_clicked()
+{
+    // Change the icon from play to pause, or vice versa, depending on the current status, and change playback accordingly
+    if (this->playbackManager.isPaused())
+    {
+        // Change the icon
+        ui->mediaControlsWidget->findChild<QPushButton *>("playPauseButton", Qt::FindChildrenRecursively)->setIcon(QIcon::fromTheme("media-playback-pause"));
+
+        // Play audio
+        this->playbackManager.playAudio();
+    }
+    else
+    {
+        // Change the icon
+        ui->mediaControlsWidget->findChild<QPushButton *>("playPauseButton", Qt::FindChildrenRecursively)->setIcon(QIcon::fromTheme("media-playback-start"));
+
+        // Pause audio
+        this->playbackManager.pauseAudio();
     }
 }
