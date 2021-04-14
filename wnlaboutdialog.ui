@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>About WhiteNoiseLinux</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources_WhiteNoiseLinux.qrc">
+    <normaloff>:/images/logo_square.svg</normaloff>:/images/logo_square.svg</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
