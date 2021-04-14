@@ -20,12 +20,15 @@ class WNLPlaybackManager
 public:
     PaStream* stream;
     QVector<WNLSoundInfo> playingSounds;
+    int numChannels;
+    int sampleRate;
 
     WNLPlaybackManager();
     ~WNLPlaybackManager();
     static int paCallback(const void* inputBuffer, void* outputBuffer, unsigned long framesPerBuffer,
                           const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags,
                           void* userData);
+    int paMethod(float* out, unsigned long framesPerBuffer);
     void addSound(WNLSound sound);
     void rmSound(int index);
     void playAudio();

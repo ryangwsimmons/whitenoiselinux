@@ -1,6 +1,8 @@
 #include "wnlplaybackmanager.h"
 
 WNLPlaybackManager::WNLPlaybackManager()
+    : numChannels(2),
+      sampleRate(44100)
 {
     // Initialize PortAudio
     PaError err = Pa_Initialize();
@@ -14,12 +16,12 @@ WNLPlaybackManager::WNLPlaybackManager()
     // Open the default stream
     err = Pa_OpenDefaultStream(&(this->stream),
                                0,
-                               2,
+                               this->numChannels,
                                paFloat32,
-                               44100,
+                               this->sampleRate,
                                paFramesPerBufferUnspecified,
                                &WNLPlaybackManager::paCallback,
-                               &(this->playingSounds));
+                               this);
     if (err != paNoError)
     {
         qDebug() << "PortAudio encountered an error:";
@@ -61,8 +63,8 @@ int WNLPlaybackManager::paCallback(const void* inputBuffer, void* outputBuffer, 
                       const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags,
                       void* userData)
 {
-    // Cast the user data to the right type
-    QVector<WNLSoundInfo>* soundList = (QVector<WNLSoundInfo>*)userData;
+    // Get the playback manager from the user data pointer
+    WNLPlaybackManager* playbackManager = (WNLPlaybackManager*)userData;
 
     // Cast the output buffer to the right type
     float* out = (float*)outputBuffer;
@@ -72,25 +74,31 @@ int WNLPlaybackManager::paCallback(const void* inputBuffer, void* outputBuffer, 
     (void) timeInfo;
     (void) statusFlags;
 
+    // Return the playback manager's PortAudio method
+    return playbackManager->paMethod(out, framesPerBuffer);
+}
+
+int WNLPlaybackManager::paMethod(float* out, unsigned long framesPerBuffer)
+{
     // Zero-out the output buffer
-    for (unsigned long i = 0; i < framesPerBuffer * 2; i++)
+    for (unsigned long i = 0; i < framesPerBuffer * this->numChannels; i++)
     {
         out[i] = 0;
     }
 
     // Create temporary buffer for each of the sounds to be read to
-    float tempBuffer[framesPerBuffer * 2];
+    float tempBuffer[framesPerBuffer * this->numChannels];
 
     // Iterate over every sound file, adding the file to the buffer
-    for (WNLSoundInfo sound : *soundList)
+    for (WNLSoundInfo sound : this->playingSounds)
     {
         // Read the sound file's data out as a float to the output buffer
         int bytesRead = sf_readf_float(sound.file, tempBuffer, framesPerBuffer);
 
         // Add the sound to the output buffer (reducing volume to prevent peaking)
-        for (unsigned long i = 0; i < framesPerBuffer * 2; i++)
+        for (unsigned long i = 0; i < framesPerBuffer * this->numChannels; i++)
         {
-            out[i] += tempBuffer[i] * (1.0 / soundList->size());
+            out[i] += tempBuffer[i] * (1.0 / this->playingSounds.size());
         }
 
         // If EOF has been reached, seek to the beginning of the file
