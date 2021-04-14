@@ -72,26 +72,25 @@ int WNLPlaybackManager::paCallback(const void* inputBuffer, void* outputBuffer, 
     (void) timeInfo;
     (void) statusFlags;
 
-    // If there are no sounds in the list, write zeros to the output buffer
-    // If we don't do this, if the user hits play with no sounds in the list, they'll hear an annoying sound since PortAudio tries to play whatever the value of the buffer currently is in memory
-    if (soundList->size() == 0)
+    // Zero-out the output buffer
+    for (unsigned long i = 0; i < framesPerBuffer * 2; i++)
     {
-        for (unsigned long i = 0; i < framesPerBuffer * 2; i++)
-        {
-            out[i] = 0;
-        }
+        out[i] = 0;
     }
+
+    // Create temporary buffer for each of the sounds to be read to
+    float tempBuffer[framesPerBuffer * 2];
 
     // Iterate over every sound file, adding the file to the buffer
     for (WNLSoundInfo sound : *soundList)
     {
         // Read the sound file's data out as a float to the output buffer
-        int bytesRead = sf_readf_float(sound.file, out, framesPerBuffer);
+        int bytesRead = sf_readf_float(sound.file, tempBuffer, framesPerBuffer);
 
-        // Reduce the volume of the sound so that all sounds have the same volume without peaking
+        // Add the sound to the output buffer (reducing volume to prevent peaking)
         for (unsigned long i = 0; i < framesPerBuffer * 2; i++)
         {
-            out[i] = out[i] * (1.0 / soundList->size());
+            out[i] += tempBuffer[i] * (1.0 / soundList->size());
         }
 
         // If EOF has been reached, seek to the beginning of the file
