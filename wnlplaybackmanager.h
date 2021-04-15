@@ -3,6 +3,9 @@
 
 #include <portaudio.h>
 #include <QDebug>
+#include <QObject>
+#include <QString>
+#include <QStringList>
 #include <QVector>
 #include <sndfile.h>
 
@@ -34,6 +37,10 @@ public:
     void playAudio();
     void pauseAudio();
     bool isPaused();
+    QString getCurrentlyPlayingString();
+
+private:
+    void setupAudio();
 };
 
 #endif // WNLPLAYBACKMANAGER_H

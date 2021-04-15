@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui dbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,12 +19,16 @@ SOURCES += \
     main.cpp \
     wnlaboutdialog.cpp \
     wnlmainwindow.cpp \
+    wnlmprismediaplayer2adaptor.cpp \
+    wnlmprismediaplayer2playeradaptor.cpp \
     wnlplaybackmanager.cpp \
     wnlsoundgrabber.cpp
 
 HEADERS += \
     wnlaboutdialog.h \
     wnlmainwindow.h \
+    wnlmprismediaplayer2adaptor.h \
+    wnlmprismediaplayer2playeradaptor.h \
     wnlplaybackmanager.h \
     wnlsound.h \
     wnlsoundgrabber.h

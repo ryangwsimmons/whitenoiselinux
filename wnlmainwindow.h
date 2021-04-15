@@ -2,15 +2,22 @@
 #define WNLMAINWINDOW_H
 
 #include <QtConcurrent/QtConcurrent>
+#include <QCoreApplication>
+#include <QDBusConnection>
+#include <QDebug>
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QIcon>
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QMainWindow>
+#include <QString>
+#include <QStringLiteral>
 #include <QVariant>
 
 #include "wnlaboutdialog.h"
+#include "wnlmprismediaplayer2adaptor.h"
+#include "wnlmprismediaplayer2playeradaptor.h"
 #include "wnlplaybackmanager.h"
 #include "wnlsoundgrabber.h"
 
@@ -24,6 +31,8 @@ class WNLMainWindow : public QMainWindow
 
 public:
     WNLPlaybackManager playbackManager;
+    QDBusConnection dBusConn;
+    WNLMPRISMediaPlayer2PlayerAdaptor* playerAdaptor;
 
     WNLMainWindow(QWidget *parent = nullptr);
     ~WNLMainWindow();
@@ -41,7 +50,13 @@ private slots:
 
     void on_playPauseButton_clicked();
 
+    void playAudio();
+
+    void pauseAudio();
+
 private:
     Ui::WNLMainWindow *ui;
+
+    void setupDBus();
 };
 #endif // WNLMAINWINDOW_H

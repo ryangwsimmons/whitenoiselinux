@@ -2,8 +2,9 @@
 #include "ui_wnlmainwindow.h"
 
 WNLMainWindow::WNLMainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::WNLMainWindow)
+    : QMainWindow(parent),
+      dBusConn(QDBusConnection::sessionBus()),
+      ui(new Ui::WNLMainWindow)
 {
     ui->setupUi(this);
 
@@ -22,6 +23,9 @@ WNLMainWindow::WNLMainWindow(QWidget *parent)
             ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively)->addItem(soundItem);
         }
 
+        // Setup D-Bus stuff
+        this->setupDBus();
+
         delete soundsFutureWatcher;
     });
     soundsFutureWatcher->setFuture(soundsFuture);
@@ -30,8 +34,41 @@ WNLMainWindow::WNLMainWindow(QWidget *parent)
 WNLMainWindow::~WNLMainWindow()
 {
     delete ui;
+
+    // Unregister the MPRIS object
+    this->dBusConn.unregisterObject("/org/mpris/MediaPlayer2");
+
+    // Unregister the MPRIS service
+    bool unregisteredSuccessfully = this->dBusConn.unregisterService(QStringLiteral("org.mpris.MediaPlayer2.whitenoiselinux.instance%1").arg(QCoreApplication::applicationPid()));
+    if (unregisteredSuccessfully == false)
+    {
+        qDebug() << "Unable to unregister MPRIS service.";
+    }
 }
 
+void WNLMainWindow::playAudio()
+{
+    // Change the icon
+    ui->mediaControlsWidget->findChild<QPushButton *>("playPauseButton", Qt::FindChildrenRecursively)->setIcon(QIcon::fromTheme("media-playback-pause"));
+
+    // Play audio
+    this->playbackManager.playAudio();
+
+    // Tell MPRIS that audio has started playing
+    this->playerAdaptor->setPlaybackStatus("Playing");
+}
+
+void WNLMainWindow::pauseAudio()
+{
+    // Change the icon
+    ui->mediaControlsWidget->findChild<QPushButton *>("playPauseButton", Qt::FindChildrenRecursively)->setIcon(QIcon::fromTheme("media-playback-start"));
+
+    // Pause audio
+    this->playbackManager.pauseAudio();
+
+    // Tell MPRIS that the audio has been paused
+    this->playerAdaptor->setPlaybackStatus("Paused");
+}
 
 void WNLMainWindow::on_aboutButton_clicked()
 {
@@ -64,6 +101,9 @@ void WNLMainWindow::on_addSoundButton_clicked()
         // Open the sound and add it to the list of currently playing sounds
         this->playbackManager.addSound(selectedItem->data(Qt::UserRole).value<WNLSound>());
     }
+
+    // Update the MPRIS track title value
+    this->playerAdaptor->setTrackTitle(this->playbackManager.getCurrentlyPlayingString());
 }
 
 void WNLMainWindow::on_rmSoundButton_clicked()
@@ -84,6 +124,9 @@ void WNLMainWindow::on_rmSoundButton_clicked()
         // Remove the sound from the playback manager
         this->playbackManager.rmSound(selectedIndex.row());
     }
+
+    // Update the MPRIS track title value
+    this->playerAdaptor->setTrackTitle(this->playbackManager.getCurrentlyPlayingString());
 }
 
 void WNLMainWindow::on_currSoundsSelect_itemSelectionChanged()
@@ -117,18 +160,40 @@ void WNLMainWindow::on_playPauseButton_clicked()
     // Change the icon from play to pause, or vice versa, depending on the current status, and change playback accordingly
     if (this->playbackManager.isPaused())
     {
-        // Change the icon
-        ui->mediaControlsWidget->findChild<QPushButton *>("playPauseButton", Qt::FindChildrenRecursively)->setIcon(QIcon::fromTheme("media-playback-pause"));
-
-        // Play audio
-        this->playbackManager.playAudio();
+        // Call the playAudio method
+        this->playAudio();
     }
     else
     {
-        // Change the icon
-        ui->mediaControlsWidget->findChild<QPushButton *>("playPauseButton", Qt::FindChildrenRecursively)->setIcon(QIcon::fromTheme("media-playback-start"));
+        // Call the pauseAudio method
+        this->pauseAudio();
+    }
+}
 
-        // Pause audio
-        this->playbackManager.pauseAudio();
+void WNLMainWindow::setupDBus()
+{
+    // Instantiate both adaptors (multiple are needed to implement multiple interfaces)
+    // The first adaptor's pointer doesn't need to be saved to a variable since we won't need to access it again
+    // Qt will handle the memory management
+    new WNLMPRISMediaPlayer2Adaptor(this);
+    this->playerAdaptor = new WNLMPRISMediaPlayer2PlayerAdaptor(this);
+
+    //Connect the player adaptor's signals to slots in the application so that the application can react when various events occur
+    connect(this->playerAdaptor, &WNLMPRISMediaPlayer2PlayerAdaptor::wasPaused, this, &WNLMainWindow::pauseAudio);
+    connect(this->playerAdaptor, &WNLMPRISMediaPlayer2PlayerAdaptor::wasPlayPaused, this, &WNLMainWindow::on_playPauseButton_clicked);
+    connect(this->playerAdaptor, &WNLMPRISMediaPlayer2PlayerAdaptor::wasPlayed, this, &WNLMainWindow::playAudio);
+
+    // Register the MPRIS service
+    bool registeredSuccessfully = this->dBusConn.registerService(QStringLiteral("org.mpris.MediaPlayer2.whitenoiselinux.instance%1").arg(QCoreApplication::applicationPid()));
+    if (registeredSuccessfully == false)
+    {
+        qDebug() << "Unable to register MPRIS service, media controls from Linux won't work.";
+    }
+
+    // Register the MPRIS object
+    registeredSuccessfully = this->dBusConn.registerObject("/org/mpris/MediaPlayer2", this);
+    if (registeredSuccessfully == false)
+    {
+        qDebug() << "Unable to register MPRIS object, media controls from Linux won't work.";
     }
 }

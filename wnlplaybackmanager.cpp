@@ -4,29 +4,8 @@ WNLPlaybackManager::WNLPlaybackManager()
     : numChannels(2),
       sampleRate(44100)
 {
-    // Initialize PortAudio
-    PaError err = Pa_Initialize();
-    if (err != paNoError)
-    {
-        qDebug() << "PortAudio encountered an error:";
-        qDebug() << Pa_GetErrorText(err);
-        return;
-    }
-
-    // Open the default stream
-    err = Pa_OpenDefaultStream(&(this->stream),
-                               0,
-                               this->numChannels,
-                               paFloat32,
-                               this->sampleRate,
-                               paFramesPerBufferUnspecified,
-                               &WNLPlaybackManager::paCallback,
-                               this);
-    if (err != paNoError)
-    {
-        qDebug() << "PortAudio encountered an error:";
-        qDebug() << Pa_GetErrorText(err);
-    }
+    // Setup audio stuff
+    this->setupAudio();
 }
 
 WNLPlaybackManager::~WNLPlaybackManager()
@@ -150,6 +129,7 @@ void WNLPlaybackManager::rmSound(int index)
 
 void WNLPlaybackManager::playAudio()
 {
+    // Start the stream
     PaError err = Pa_StartStream(this->stream);
     if (err != paNoError)
     {
@@ -171,4 +151,52 @@ void WNLPlaybackManager::pauseAudio()
 bool WNLPlaybackManager::isPaused()
 {
     return Pa_IsStreamStopped(this->stream) == 1;
+}
+
+QString WNLPlaybackManager::getCurrentlyPlayingString()
+{
+    // If there are no currently playing sounds, return a message that says as such
+    if (this->playingSounds.size() == 0)
+    {
+        return "No Sounds Selected";
+    }
+
+    // Declare a new QStringList for storing the names of the currently playing sounds
+    QStringList playingNames;
+
+    // Add the name of each currently playing sound to the string list
+    for (WNLSoundInfo soundInfo : this->playingSounds)
+    {
+        playingNames.append(soundInfo.sound.name);
+    }
+
+    // Return a string containing the names of all the sounds playing, separated by ", "
+    return playingNames.join(", ");
+}
+
+void WNLPlaybackManager::setupAudio()
+{
+    // Initialize PortAudio
+    PaError err = Pa_Initialize();
+    if (err != paNoError)
+    {
+        qDebug() << "PortAudio encountered an error:";
+        qDebug() << Pa_GetErrorText(err);
+        return;
+    }
+
+    // Open the default stream
+    err = Pa_OpenDefaultStream(&(this->stream),
+                               0,
+                               this->numChannels,
+                               paFloat32,
+                               this->sampleRate,
+                               paFramesPerBufferUnspecified,
+                               &WNLPlaybackManager::paCallback,
+                               this);
+    if (err != paNoError)
+    {
+        qDebug() << "PortAudio encountered an error:";
+        qDebug() << Pa_GetErrorText(err);
+    }
 }
