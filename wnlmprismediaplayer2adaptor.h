@@ -13,23 +13,27 @@ class WNLMPRISMediaPlayer2Adaptor : public QDBusAbstractAdaptor
     Q_PROPERTY(bool CanRaise READ getCanRaise)
     Q_PROPERTY(bool HasTrackList READ getHasTrackList)
     Q_PROPERTY(QString Identity READ getIdentity)
+    Q_PROPERTY(QString DesktopEntry READ getDesktopEntry)
     Q_PROPERTY(QStringList SupportedUriSchemes READ getSupportedUriSchemes)
     Q_PROPERTY(QStringList SupportedMimeTypes READ getSupportedMimeTypes)
 public:
+    WNLMPRISMediaPlayer2Adaptor(QObject* object);
+    bool getCanQuit() const;
+    bool getCanRaise() const;
+    bool getHasTrackList() const;
+    QString getIdentity() const;
+    QString getDesktopEntry() const;
+    QStringList getSupportedUriSchemes() const;
+    QStringList getSupportedMimeTypes() const;
+
+private:
     const bool CanQuit;
     const bool CanRaise;
     const bool HasTrackList;
     const QString Identity;
+    const QString DesktopEntry;
     const QStringList SupportedUriSchemes;
     const QStringList SupportedMimeTypes;
-
-    WNLMPRISMediaPlayer2Adaptor(QObject* object);
-    bool getCanQuit();
-    bool getCanRaise();
-    bool getHasTrackList();
-    QString getIdentity();
-    QStringList getSupportedUriSchemes();
-    QStringList getSupportedMimeTypes();
 };
 
 #endif // WNLMPRISMEDIAPLAYER2ADAPTOR_H

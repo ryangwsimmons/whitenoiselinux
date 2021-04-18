@@ -155,3 +155,182 @@
    fun:start_thread
    fun:clone
 }
+{
+   /usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0[Memcheck:Cond]
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:PaAlsa_Initialize
+   fun:Pa_Initialize
+   fun:_ZN18WNLPlaybackManager10setupAudioEv
+   fun:_ZN18WNLPlaybackManagerC1Ev
+   fun:_ZN13WNLMainWindowC1EP7QWidget
+   fun:main
+}
+{
+   /usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0[Memcheck:Cond]
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:Pa_OpenStream
+   fun:Pa_OpenDefaultStream
+   fun:_ZN18WNLPlaybackManager10setupAudioEv
+   fun:_ZN18WNLPlaybackManagerC1Ev
+   fun:_ZN13WNLMainWindowC1EP7QWidget
+   fun:main
+}
+{
+   /usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0[Memcheck:Cond]
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:Pa_OpenStream
+   fun:Pa_OpenDefaultStream
+   fun:_ZN18WNLPlaybackManager10setupAudioEv
+   fun:_ZN18WNLPlaybackManagerC1Ev
+   fun:_ZN13WNLMainWindowC1EP7QWidget
+   fun:main
+}
+{
+   malloc[Memcheck:Cond]
+   Memcheck:Cond
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:Pa_OpenStream
+   fun:Pa_OpenDefaultStream
+   fun:_ZN18WNLPlaybackManager10setupAudioEv
+   fun:_ZN18WNLPlaybackManagerC1Ev
+   fun:_ZN13WNLMainWindowC1EP7QWidget
+   fun:main
+}
+{
+   WNLPlaybackManager::paMethod(float*, unsigned long)[Memcheck:Cond]
+   Memcheck:Cond
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   WNLPlaybackManager::paMethod(float*, unsigned long)[Memcheck:Value8]
+   Memcheck:Value8
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   sf_readf_float[Memcheck:Cond]
+   Memcheck:Cond
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   /usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28[Memcheck:Value8]
+   Memcheck:Value8
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   WNLPlaybackManager::paMethod(float*, unsigned long)[Memcheck:Value8]
+   Memcheck:Value8
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   /usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28[Memcheck:Cond]
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   /usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28[Memcheck:Cond]
+   Memcheck:Cond
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   vorbis_synthesis_read[Memcheck:Cond]
+   Memcheck:Cond
+   fun:vorbis_synthesis_read
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   vorbis_synthesis_pcmout[Memcheck:Cond]
+   Memcheck:Cond
+   fun:vorbis_synthesis_pcmout
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}
+{
+   vorbis_synthesis_blockin[Memcheck:Cond]
+   Memcheck:Cond
+   fun:vorbis_synthesis_blockin
+   obj:/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+   fun:sf_readf_float
+   fun:_ZN18WNLPlaybackManager8paMethodEPfm
+   fun:_ZN18WNLPlaybackManager10paCallbackEPKvPvmPK24PaStreamCallbackTimeInfomS2_
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libportaudio.so.2.0.0
+   fun:start_thread
+   fun:clone
+}

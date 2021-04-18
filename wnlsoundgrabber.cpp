@@ -7,7 +7,7 @@ WNLSoundGrabber::WNLSoundGrabber()
 
 }
 
-QVector<WNLSound> WNLSoundGrabber::getSounds()
+QVector<WNLSound> WNLSoundGrabber::getSounds() const
 {
     // Create the sounds directory if it does not yet exist
     QString soundsPath(QDir::homePath() + QDir::separator() + ".whitenoiselinux" + QDir::separator() + "sounds");
@@ -23,7 +23,7 @@ QVector<WNLSound> WNLSoundGrabber::getSounds()
     // Create a QVector to hold the list of sounds
     QVector<WNLSound> sounds;
 
-    //Iterate over each file in the folder, getting its name and creating a structure for it, adding that structure to the vector
+    // Iterate over each file in the folder, getting its name and creating a structure for it, adding that structure to the vector
     QStringList soundFiles = soundsDir.entryList();
     for (QString soundFilePath : soundFiles)
     {

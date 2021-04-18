@@ -2,19 +2,15 @@
 #define WNLMPRISMEDIAPLAYER2PLAYERADAPTOR_H
 
 #include <QDBusAbstractAdaptor>
-#include <QDBusArgument>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusMetaType>
 #include <QDBusObjectPath>
-#include <QMap>
 #include <QString>
 #include <QStringList>
-#include <QVariant>
 #include <QVariantMap>
 
-typedef QMap<QString, QVariant> MetadataMap;
-Q_DECLARE_METATYPE(MetadataMap)
+#include "wnlmprismetadatamap.h"
 
 class WNLMPRISMediaPlayer2PlayerAdaptor : public QDBusAbstractAdaptor
 {
@@ -22,7 +18,7 @@ class WNLMPRISMediaPlayer2PlayerAdaptor : public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.mpris.MediaPlayer2.Player")
     Q_PROPERTY(QString PlaybackStatus READ getPlaybackStatus)
     Q_PROPERTY(double Rate READ getRate WRITE setRate)
-    Q_PROPERTY(MetadataMap Metadata READ getMetadata)
+    Q_PROPERTY(WNLMPRISMetadataMap Metadata READ getMetadata)
     Q_PROPERTY(double Volume READ getVolume WRITE setVolume)
     Q_PROPERTY(qlonglong Position READ getPosition)
     Q_PROPERTY(double MinimumRate READ getMinimumRate)
@@ -34,58 +30,58 @@ class WNLMPRISMediaPlayer2PlayerAdaptor : public QDBusAbstractAdaptor
     Q_PROPERTY(bool CanSeek READ getCanSeek)
     Q_PROPERTY(bool CanControl READ getCanControl)
 public:
-    QString PlaybackStatus;
-    double Rate;
-    MetadataMap Metadata;
-    double Volume;
-    qlonglong Position;
-    double MinimumRate;
-    double MaximumRate;
-    bool CanGoNext;
-    bool CanGoPrevious;
-    bool CanPlay;
-    bool CanPause;
-    bool CanSeek;
-    bool CanControl;
-
     WNLMPRISMediaPlayer2PlayerAdaptor(QObject* object);
-    QString getPlaybackStatus();
+    QString getPlaybackStatus() const;
     void setPlaybackStatus(QString status);
-    double getRate();
+    double getRate() const;
     void setRate(double Rate);
-    MetadataMap getMetadata();
+    WNLMPRISMetadataMap getMetadata() const;
     void setTrackTitle(QString title);
-    double getVolume();
+    double getVolume() const;
     void setVolume(double Volume);
-    qlonglong getPosition();
-    double getMinimumRate();
-    double getMaximumRate();
-    bool getCanGoNext();
-    bool getCanGoPrevious();
-    bool getCanPlay();
-    bool getCanPause();
-    bool getCanSeek();
-    bool getCanControl();
+    qlonglong getPosition() const;
+    double getMinimumRate() const;
+    double getMaximumRate() const;
+    bool getCanGoNext() const;
+    bool getCanGoPrevious() const;
+    bool getCanPlay() const;
+    bool getCanPause() const;
+    bool getCanSeek() const;
+    bool getCanControl() const;
 
 signals:
-    void Seeked(qlonglong Position);
-    void wasPaused();
-    void wasPlayed();
-    void wasPlayPaused();
+    void Seeked(qlonglong Position) const;
+    void wasPaused() const;
+    void wasPlayed() const;
+    void wasPlayPaused() const;
 
 public slots:
-    void Next();
-    void Previous();
-    void Pause();
-    void PlayPause();
-    void Stop();
-    void Play();
-    void Seek(qlonglong Offset);
-    void SetPosition(QDBusObjectPath TrackId, qlonglong Position);
-    void OpenUri(QString Uri);
+    void Next() const;
+    void Previous() const;
+    void Pause() const;
+    void PlayPause() const;
+    void Stop() const;
+    void Play() const;
+    void Seek(qlonglong Offset) const;
+    void SetPosition(QDBusObjectPath TrackId, qlonglong Position) const;
+    void OpenUri(QString Uri) const;
 
 private:
-    void emitPropertyChanged(QString propertyName);
+    QString PlaybackStatus;
+    double Rate;
+    WNLMPRISMetadataMap Metadata;
+    double Volume;
+    const qlonglong Position;
+    const double MinimumRate;
+    const double MaximumRate;
+    const bool CanGoNext;
+    const bool CanGoPrevious;
+    const bool CanPlay;
+    const bool CanPause;
+    const bool CanSeek;
+    const bool CanControl;
+
+    void emitPropertyChanged(QString propertyName) const;
 };
 
 #endif // WNLMPRISMEDIAPLAYER2PLAYERADAPTOR_H

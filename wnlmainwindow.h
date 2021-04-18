@@ -19,6 +19,8 @@
 #include "wnlmprismediaplayer2adaptor.h"
 #include "wnlmprismediaplayer2playeradaptor.h"
 #include "wnlplaybackmanager.h"
+#include "wnlplaylist.h"
+#include "wnlplaylistmanager.h"
 #include "wnlsoundgrabber.h"
 
 QT_BEGIN_NAMESPACE
@@ -30,15 +32,11 @@ class WNLMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    WNLPlaybackManager playbackManager;
-    QDBusConnection dBusConn;
-    WNLMPRISMediaPlayer2PlayerAdaptor* playerAdaptor;
-
     WNLMainWindow(QWidget *parent = nullptr);
     ~WNLMainWindow();
 
 private slots:
-    void on_aboutButton_clicked();
+    void on_aboutButton_clicked() const;
 
     void on_addSoundButton_clicked();
 
@@ -54,9 +52,20 @@ private slots:
 
     void pauseAudio();
 
+    void on_saveButton_clicked();
+
+    void on_deleteButton_clicked();
+
+    void addPlaylist(WNLPlaylist newPlaylist);
+
 private:
     Ui::WNLMainWindow *ui;
+    WNLPlaybackManager playbackManager;
+    WNLPlaylistManager playlistManager;
+    QDBusConnection dBusConn;
+    WNLMPRISMediaPlayer2PlayerAdaptor* playerAdaptor;
 
     void setupDBus();
+    void setupPlaylists();
 };
 #endif // WNLMAINWINDOW_H

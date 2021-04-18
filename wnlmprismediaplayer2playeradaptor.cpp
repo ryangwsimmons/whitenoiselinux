@@ -4,7 +4,7 @@ WNLMPRISMediaPlayer2PlayerAdaptor::WNLMPRISMediaPlayer2PlayerAdaptor(QObject* ob
     : QDBusAbstractAdaptor(object),
       PlaybackStatus("Paused"),
       Rate(1.0),
-      Metadata(QMap<QString, QVariant>()),
+      Metadata(),
       Volume(1.0),
       Position(0),
       MinimumRate(1.0),
@@ -17,15 +17,15 @@ WNLMPRISMediaPlayer2PlayerAdaptor::WNLMPRISMediaPlayer2PlayerAdaptor(QObject* ob
       CanControl(true)
 {
     // Register metadata map meta type with Qt D-Bus
-    qDBusRegisterMetaType<MetadataMap>();
+    qDBusRegisterMetaType<WNLMPRISMetadataMap>();
 
     // Set up the initial metadata map
-    this->Metadata.insert("mpris:trackid", QDBusObjectPath("/org/mpris/MediaPlayer2/CurrentlyPlaying"));
-    this->Metadata.insert("xesam:artist", QStringList("WhiteNoiseLinux"));
-    this->Metadata.insert("xesam:title", "No Sounds Selected");
+    this->Metadata.insert("mpris:trackid", QDBusVariant(QDBusObjectPath("/org/mpris/MediaPlayer2/CurrentlyPlaying")));
+    this->Metadata.insert("xesam:artist", QDBusVariant(QStringList("WhiteNoiseLinux")));
+    this->Metadata.insert("xesam:title", QDBusVariant("No Sounds Selected"));
 }
 
-QString WNLMPRISMediaPlayer2PlayerAdaptor::getPlaybackStatus()
+QString WNLMPRISMediaPlayer2PlayerAdaptor::getPlaybackStatus() const
 {
     return this->PlaybackStatus;
 }
@@ -37,7 +37,7 @@ void WNLMPRISMediaPlayer2PlayerAdaptor::setPlaybackStatus(QString status)
     this->emitPropertyChanged("PlaybackStatus");
 }
 
-double WNLMPRISMediaPlayer2PlayerAdaptor::getRate()
+double WNLMPRISMediaPlayer2PlayerAdaptor::getRate() const
 {
     return this->Rate;
 }
@@ -47,19 +47,19 @@ void WNLMPRISMediaPlayer2PlayerAdaptor::setRate(double Rate)
     this->Rate = Rate;
 }
 
-QMap<QString, QVariant> WNLMPRISMediaPlayer2PlayerAdaptor::getMetadata()
+WNLMPRISMetadataMap WNLMPRISMediaPlayer2PlayerAdaptor::getMetadata() const
 {
     return this->Metadata;
 }
 
 void WNLMPRISMediaPlayer2PlayerAdaptor::setTrackTitle(QString title)
 {
-    this->Metadata.insert("xesam:title", title);
+    this->Metadata.insert("xesam:title", QDBusVariant(title));
 
     this->emitPropertyChanged("Metadata");
 }
 
-double WNLMPRISMediaPlayer2PlayerAdaptor::getVolume()
+double WNLMPRISMediaPlayer2PlayerAdaptor::getVolume() const
 {
     return this->Volume;
 }
@@ -69,89 +69,89 @@ void WNLMPRISMediaPlayer2PlayerAdaptor::setVolume(double Volume)
     this->Volume = Volume;
 }
 
-qlonglong WNLMPRISMediaPlayer2PlayerAdaptor::getPosition()
+qlonglong WNLMPRISMediaPlayer2PlayerAdaptor::getPosition() const
 {
     return this->Position;
 }
 
-double WNLMPRISMediaPlayer2PlayerAdaptor::getMinimumRate()
+double WNLMPRISMediaPlayer2PlayerAdaptor::getMinimumRate() const
 {
     return this->MinimumRate;
 }
 
-double WNLMPRISMediaPlayer2PlayerAdaptor::getMaximumRate()
+double WNLMPRISMediaPlayer2PlayerAdaptor::getMaximumRate() const
 {
     return this->MaximumRate;
 }
 
-bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanGoNext()
+bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanGoNext() const
 {
     return this->CanGoNext;
 }
 
-bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanGoPrevious()
+bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanGoPrevious() const
 {
     return this->CanGoPrevious;
 }
 
-bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanPlay()
+bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanPlay() const
 {
     return this->CanPlay;
 }
 
-bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanPause()
+bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanPause() const
 {
     return this->CanPause;
 }
 
-bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanSeek()
+bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanSeek() const
 {
     return this->CanSeek;
 }
 
-bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanControl()
+bool WNLMPRISMediaPlayer2PlayerAdaptor::getCanControl() const
 {
     return this->CanControl;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::Next()
+void WNLMPRISMediaPlayer2PlayerAdaptor::Next() const
 {
     // Application does not allow seeking, so this method does nothing
     return;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::Previous()
+void WNLMPRISMediaPlayer2PlayerAdaptor::Previous() const
 {
     // Application does not allow seeking, so this method does nothing
     return;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::Pause()
+void WNLMPRISMediaPlayer2PlayerAdaptor::Pause() const
 {
     // Emit the wasPaused signal so that the application knows to pause the audio
     emit this->wasPaused();
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::PlayPause()
+void WNLMPRISMediaPlayer2PlayerAdaptor::PlayPause() const
 {
     // Emit the wasPlayPaused signal so that the application knows to either play or pause the audio
     emit this->wasPlayPaused();
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::Stop()
+void WNLMPRISMediaPlayer2PlayerAdaptor::Stop() const
 {
     // "Stopping" audio doesn't really make sense in this context, so this method does nothing
     // I'm not 100% sure about this one, though. I may revisit this at a later date.
     return;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::Play()
+void WNLMPRISMediaPlayer2PlayerAdaptor::Play() const
 {
     // Emit the wasPlayed signal so that the application knows the play the audio
     emit this->wasPlayed();
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::Seek(qlonglong Offset)
+void WNLMPRISMediaPlayer2PlayerAdaptor::Seek(qlonglong Offset) const
 {
     // Application does not allow seeking, so this method does nothing
     // Prevent unused parameter warnings
@@ -159,7 +159,7 @@ void WNLMPRISMediaPlayer2PlayerAdaptor::Seek(qlonglong Offset)
     return;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::SetPosition(QDBusObjectPath TrackId, qlonglong Position)
+void WNLMPRISMediaPlayer2PlayerAdaptor::SetPosition(QDBusObjectPath TrackId, qlonglong Position) const
 {
     // Application does not allow seeking, so this method does nothing
     // Prevent unused parameter warnings
@@ -168,7 +168,7 @@ void WNLMPRISMediaPlayer2PlayerAdaptor::SetPosition(QDBusObjectPath TrackId, qlo
     return;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::OpenUri(QString Uri)
+void WNLMPRISMediaPlayer2PlayerAdaptor::OpenUri(QString Uri) const
 {
     // Opening URIs doesn't really make sense in this context, so this method does nothing
     // Prevent unused parameter warnings
@@ -176,7 +176,7 @@ void WNLMPRISMediaPlayer2PlayerAdaptor::OpenUri(QString Uri)
     return;
 }
 
-void WNLMPRISMediaPlayer2PlayerAdaptor::emitPropertyChanged(QString propertyName)
+void WNLMPRISMediaPlayer2PlayerAdaptor::emitPropertyChanged(QString propertyName) const
 {
     // Create the signal message
     QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties", "PropertiesChanged");

@@ -21,7 +21,9 @@ SOURCES += \
     wnlmainwindow.cpp \
     wnlmprismediaplayer2adaptor.cpp \
     wnlmprismediaplayer2playeradaptor.cpp \
+    wnlmprismetadatamap.cpp \
     wnlplaybackmanager.cpp \
+    wnlplaylistmanager.cpp \
     wnlsoundgrabber.cpp
 
 HEADERS += \
@@ -29,7 +31,10 @@ HEADERS += \
     wnlmainwindow.h \
     wnlmprismediaplayer2adaptor.h \
     wnlmprismediaplayer2playeradaptor.h \
+    wnlmprismetadatamap.h \
     wnlplaybackmanager.h \
+    wnlplaylist.h \
+    wnlplaylistmanager.h \
     wnlsound.h \
     wnlsoundgrabber.h
 

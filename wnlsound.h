@@ -1,6 +1,7 @@
 #ifndef WNLSOUND_H
 #define WNLSOUND_H
 
+#include <QObject>
 #include <QString>
 
 // Define a struct for storing sounds

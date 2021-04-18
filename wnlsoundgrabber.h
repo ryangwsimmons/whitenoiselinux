@@ -17,7 +17,7 @@ public:
     WNLSoundGrabber();
 
     // Declare a method for getting information on the sounds in the sound folder
-    QVector<WNLSound> getSounds();
+    QVector<WNLSound> getSounds() const;
 };
 
 #endif // WNLSOUNDGRABBER_H

@@ -21,11 +21,6 @@ struct WNLSoundInfo
 class WNLPlaybackManager
 {
 public:
-    PaStream* stream;
-    QVector<WNLSoundInfo> playingSounds;
-    int numChannels;
-    int sampleRate;
-
     WNLPlaybackManager();
     ~WNLPlaybackManager();
     static int paCallback(const void* inputBuffer, void* outputBuffer, unsigned long framesPerBuffer,
@@ -36,10 +31,15 @@ public:
     void rmSound(int index);
     void playAudio();
     void pauseAudio();
-    bool isPaused();
-    QString getCurrentlyPlayingString();
+    bool isPaused() const;
+    QString getCurrentlyPlayingString() const;
 
 private:
+    PaStream* stream = NULL;
+    QVector<WNLSoundInfo> playingSounds;
+    int numChannels;
+    int sampleRate;
+
     void setupAudio();
 };
 

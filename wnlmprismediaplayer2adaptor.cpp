@@ -6,38 +6,44 @@ WNLMPRISMediaPlayer2Adaptor::WNLMPRISMediaPlayer2Adaptor(QObject* object)
       CanRaise(false),
       HasTrackList(false),
       Identity("WhiteNoiseLinux"),
+      DesktopEntry("WhiteNoiseLinux"),
       SupportedUriSchemes(QStringList()),
       SupportedMimeTypes(QStringList("application/ogg"))
 {
 
 }
 
-bool WNLMPRISMediaPlayer2Adaptor::getCanQuit()
+bool WNLMPRISMediaPlayer2Adaptor::getCanQuit() const
 {
     return this->CanQuit;
 }
 
-bool WNLMPRISMediaPlayer2Adaptor::getCanRaise()
+bool WNLMPRISMediaPlayer2Adaptor::getCanRaise() const
 {
     return this->CanRaise;
 }
 
-bool WNLMPRISMediaPlayer2Adaptor::getHasTrackList()
+bool WNLMPRISMediaPlayer2Adaptor::getHasTrackList() const
 {
     return this->HasTrackList;
 }
 
-QString WNLMPRISMediaPlayer2Adaptor::getIdentity()
+QString WNLMPRISMediaPlayer2Adaptor::getIdentity() const
 {
     return this->Identity;
 }
 
-QStringList WNLMPRISMediaPlayer2Adaptor::getSupportedUriSchemes()
+QString WNLMPRISMediaPlayer2Adaptor::getDesktopEntry() const
+{
+    return this->DesktopEntry;
+}
+
+QStringList WNLMPRISMediaPlayer2Adaptor::getSupportedUriSchemes() const
 {
     return this->SupportedUriSchemes;
 }
 
-QStringList WNLMPRISMediaPlayer2Adaptor::getSupportedMimeTypes()
+QStringList WNLMPRISMediaPlayer2Adaptor::getSupportedMimeTypes() const
 {
     return this->SupportedMimeTypes;
 }

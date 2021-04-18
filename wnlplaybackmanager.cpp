@@ -1,7 +1,8 @@
 #include "wnlplaybackmanager.h"
 
 WNLPlaybackManager::WNLPlaybackManager()
-    : numChannels(2),
+    : playingSounds(QVector<WNLSoundInfo>()),
+      numChannels(2),
       sampleRate(44100)
 {
     // Setup audio stuff
@@ -66,7 +67,7 @@ int WNLPlaybackManager::paMethod(float* out, unsigned long framesPerBuffer)
     }
 
     // Create temporary buffer for each of the sounds to be read to
-    float tempBuffer[framesPerBuffer * this->numChannels];
+    float tempBuffer[framesPerBuffer * this->numChannels] = {0};
 
     // Iterate over every sound file, adding the file to the buffer
     for (WNLSoundInfo sound : this->playingSounds)
@@ -148,12 +149,12 @@ void WNLPlaybackManager::pauseAudio()
     }
 }
 
-bool WNLPlaybackManager::isPaused()
+bool WNLPlaybackManager::isPaused() const
 {
     return Pa_IsStreamStopped(this->stream) == 1;
 }
 
-QString WNLPlaybackManager::getCurrentlyPlayingString()
+QString WNLPlaybackManager::getCurrentlyPlayingString() const
 {
     // If there are no currently playing sounds, return a message that says as such
     if (this->playingSounds.size() == 0)

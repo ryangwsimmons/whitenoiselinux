@@ -3,8 +3,8 @@
 
 WNLMainWindow::WNLMainWindow(QWidget *parent)
     : QMainWindow(parent),
-      dBusConn(QDBusConnection::sessionBus()),
-      ui(new Ui::WNLMainWindow)
+      ui(new Ui::WNLMainWindow),
+      dBusConn(QDBusConnection::sessionBus())
 {
     ui->setupUi(this);
 
@@ -29,6 +29,9 @@ WNLMainWindow::WNLMainWindow(QWidget *parent)
         delete soundsFutureWatcher;
     });
     soundsFutureWatcher->setFuture(soundsFuture);
+
+    // Setup the playlists dropdown
+    QtConcurrent::run(this, &WNLMainWindow::setupPlaylists);
 }
 
 WNLMainWindow::~WNLMainWindow()
@@ -70,7 +73,7 @@ void WNLMainWindow::pauseAudio()
     this->playerAdaptor->setPlaybackStatus("Paused");
 }
 
-void WNLMainWindow::on_aboutButton_clicked()
+void WNLMainWindow::on_aboutButton_clicked() const
 {
     // Create new about dialog that deletes itself on close
     WNLAboutDialog *aboutDialog = new WNLAboutDialog();
@@ -196,4 +199,65 @@ void WNLMainWindow::setupDBus()
     {
         qDebug() << "Unable to register MPRIS object, media controls from Linux won't work.";
     }
+}
+
+void WNLMainWindow::on_saveButton_clicked()
+{
+    // Get a pointer to the currently playing sounds list
+    QListWidget* currSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively);
+
+    // Get a pointer to the playlist combo box
+    QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
+
+    // Make a new QVector to hold all the currently playing sounds
+    QVector<WNLSound> playingSounds;
+
+    // Add all the currently playing sounds to the vector
+    for (int i = 0; i < currSoundsSelect->count(); i++)
+    {
+        QListWidgetItem* listItem = currSoundsSelect->item(i);
+        WNLSound sound = listItem->data(Qt::UserRole).value<WNLSound>();
+        playingSounds.append(sound);
+    }
+
+    // Save the currently playing sounds as a playlist
+    this->playlistManager.savePlaylist(playlistComboBox->currentText(), playingSounds);
+
+    // Clear focus
+    this->ui->centralwidget->setFocus();
+}
+
+void WNLMainWindow::on_deleteButton_clicked()
+{
+
+}
+
+void WNLMainWindow::addPlaylist(WNLPlaylist newPlaylist)
+{
+    // Get a pointer for the playlist combo box
+    QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
+
+    // Add the new playlist to the combo box
+    playlistComboBox->addItem(newPlaylist.name, QVariant::fromValue<WNLPlaylist>(newPlaylist));
+}
+
+void WNLMainWindow::setupPlaylists()
+{
+    // Setup directory structure
+    this->playlistManager.setupDirStructure();
+
+    // Grab playlists
+    this->playlistManager.grabPlaylists();
+
+    // Add each playlist to the playlists combo box
+    QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
+
+    // Add each playlist to the combo box
+    for (WNLPlaylist playlist : this->playlistManager.getPlaylists())
+    {
+        playlistComboBox->addItem(playlist.name, QVariant::fromValue<WNLPlaylist>(playlist));
+    }
+
+    // Connect the playlist added signal to the add playlist method
+    connect(&(this->playlistManager), &WNLPlaylistManager::playlistAdded, this, &WNLMainWindow::addPlaylist);
 }
