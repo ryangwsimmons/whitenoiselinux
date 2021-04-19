@@ -26,8 +26,8 @@
    <string>WhiteNoiseLinux</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources_WhiteNoiseLinux.qrc">
-    <normaloff>:/images/logo_square.svg</normaloff>:/images/logo_square.svg</iconset>
+   <iconset resource="../res/resources_WhiteNoiseLinux.qrc">
+    <normaloff>:/images/logo_square</normaloff>:/images/logo_square</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -407,7 +407,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="resources_WhiteNoiseLinux.qrc"/>
+  <include location="../res/resources_WhiteNoiseLinux.qrc"/>
  </resources>
  <connections/>
 </ui>

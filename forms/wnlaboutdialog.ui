@@ -32,8 +32,8 @@
    <string>About WhiteNoiseLinux</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources_WhiteNoiseLinux.qrc">
-    <normaloff>:/images/logo_square.svg</normaloff>:/images/logo_square.svg</iconset>
+   <iconset resource="../res/resources_WhiteNoiseLinux.qrc">
+    <normaloff>:/images/logo_square</normaloff>:/images/logo_square</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -77,7 +77,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources_WhiteNoiseLinux.qrc">:/images/logo.svg</pixmap>
+        <pixmap resource="../res/resources_WhiteNoiseLinux.qrc">:/images/logo</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -128,7 +128,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="resources_WhiteNoiseLinux.qrc"/>
+  <include location="../res/resources_WhiteNoiseLinux.qrc"/>
  </resources>
  <connections/>
 </ui>
