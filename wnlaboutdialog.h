@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QSize>
 
+#include "config.h"
+
 namespace Ui {
 class WNLAboutDialog;
 }
