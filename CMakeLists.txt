@@ -47,8 +47,8 @@ set(MOC_HEADERS
     ./include/wnlmprismediaplayer2adaptor.h
     ./include/wnlmprismediaplayer2playeradaptor.h
     ./include/wnlmprismetadatamap.h
-    ./include/wnlplaybackmanager.h
     ./include/wnlplaylist.h
+    ./include/wnlplaybackmanager.h
     ./include/wnlplaylistmanager.h
     ./include/wnlsound.h
     ./include/wnlsoundgrabber.h

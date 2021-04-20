@@ -229,7 +229,18 @@ void WNLMainWindow::on_saveButton_clicked()
 
 void WNLMainWindow::on_deleteButton_clicked()
 {
+    // Get a pointer for the playlist combo box
+    QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
 
+    // Get the WNLPlaylist object for the currently selected playlist
+    WNLPlaylist deletedPlaylist = playlistComboBox->currentData(Qt::UserRole).value<WNLPlaylist>();
+
+    // Remove the playlist from the playlist manager and delete it from disk
+    if (this->playlistManager.deletePlaylist(deletedPlaylist))
+    {
+        // Remove the playlist from the playlist combo box
+        playlistComboBox->removeItem(playlistComboBox->currentIndex());
+    }
 }
 
 void WNLMainWindow::addPlaylist(WNLPlaylist newPlaylist)

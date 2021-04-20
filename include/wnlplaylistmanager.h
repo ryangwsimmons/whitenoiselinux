@@ -26,6 +26,7 @@ public:
     void setupDirStructure();
     void grabPlaylists();
     void savePlaylist(QString name, QVector<WNLSound> sounds);
+    bool deletePlaylist(WNLPlaylist deletedPlaylist);
     QVector<WNLPlaylist> getPlaylists();
 
 signals:
@@ -34,6 +35,8 @@ signals:
 private:
     const QString playlistsPath;
     QVector<WNLPlaylist> playlists;
+
+    void grabPlaylistSounds(WNLPlaylist* playlist);
 };
 
 #endif // WNLPLAYLISTMANAGER_H

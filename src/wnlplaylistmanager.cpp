@@ -30,6 +30,8 @@ void WNLPlaylistManager::grabPlaylists()
         if (playlistFileInfo.fileName() != "." && playlistFileInfo.fileName() != "..")
         {
             WNLPlaylist playlist = {playlistFileInfo.baseName(), playlistFileInfo.absoluteFilePath()};
+            this->grabPlaylistSounds(&playlist);
+
             this->playlists.append(playlist);
         }
     }
@@ -85,7 +87,64 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
     }
 }
 
+bool WNLPlaylistManager::deletePlaylist(WNLPlaylist deletedPlaylist)
+{
+    // Remove the playlist from the vector of playlists in this object
+    // The built-in functions to do this sort of thing with QVectors don't work with structs, so I have to do it this way
+    for (int i = 0; i < this->playlists.size(); i++)
+    {
+        if (this->playlists.at(i).name == deletedPlaylist.name && this->playlists.at(i).filePath == deletedPlaylist.filePath)
+        {
+            this->playlists.remove(i);
+        }
+    }
+
+    // Remove the playlist file from disk
+    return QFile::remove(deletedPlaylist.filePath);
+}
+
 QVector<WNLPlaylist> WNLPlaylistManager::getPlaylists()
 {
     return this->playlists;
+}
+
+void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
+{
+    // Create a QFile object for the playlist file
+    QFile playlistFile(playlist->filePath);
+
+    // Open the playlist file (if this fails, print a debug message)
+    if (!playlistFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Unable to read playlist " << playlist->name << ".";
+        return;
+    }
+
+    // Create a QTextStream for the playlist file
+    QTextStream playlistStream(&playlistFile);
+
+    // Create a JSON document from the file
+    QJsonDocument playlistJson = QJsonDocument::fromJson(playlistStream.readAll().toUtf8());
+
+    // Close the playlist file
+    playlistFile.close();
+
+    // Check that the playlist JSON isn't null
+    if (playlistJson.isNull())
+    {
+        qDebug() << "Unable to parse playlist " << playlist->name << ".";
+        return;
+    }
+
+    // Iterate over the JSON document's array, adding all of the sounds to the playlist struct's sounds vector
+    for (QJsonValue soundJson : playlistJson.array())
+    {
+        QJsonObject soundJsonObject = soundJson.toObject();
+        WNLSound sound;
+
+        sound.name = soundJsonObject.value("title").toString();
+        sound.fileName = soundJsonObject.value("filePath").toString();
+
+        playlist->sounds.append(sound);
+    }
 }
