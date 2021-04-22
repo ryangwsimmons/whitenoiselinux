@@ -1,6 +1,7 @@
 #ifndef WNLPLAYLISTMANAGER_H
 #define WNLPLAYLISTMANAGER_H
 
+#include <stdexcept>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -36,7 +37,7 @@ private:
     const QString playlistsPath;
     QVector<WNLPlaylist> playlists;
 
-    void grabPlaylistSounds(WNLPlaylist* playlist);
+    bool grabPlaylistSounds(WNLPlaylist* playlist);
 };
 
 #endif // WNLPLAYLISTMANAGER_H

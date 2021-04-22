@@ -29,10 +29,10 @@ void WNLPlaylistManager::grabPlaylists()
     {
         if (playlistFileInfo.fileName() != "." && playlistFileInfo.fileName() != "..")
         {
-            WNLPlaylist playlist = {playlistFileInfo.baseName(), playlistFileInfo.absoluteFilePath()};
-            this->grabPlaylistSounds(&playlist);
+            WNLPlaylist playlist(playlistFileInfo.baseName(), playlistFileInfo.absoluteFilePath());
 
-            this->playlists.append(playlist);
+            if (this->grabPlaylistSounds(&playlist))
+                this->playlists.append(playlist);
         }
     }
 }
@@ -101,7 +101,7 @@ QVector<WNLPlaylist> WNLPlaylistManager::getPlaylists()
     return this->playlists;
 }
 
-void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
+bool WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
 {
     // Create a QFile object for the playlist file
     QFile playlistFile(playlist->getFilePath());
@@ -110,7 +110,7 @@ void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
     if (!playlistFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qDebug() << "Unable to read playlist " << playlist->getName() << ".";
-        return;
+        return false;
     }
 
     // Create a QTextStream for the playlist file
@@ -125,19 +125,46 @@ void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
     // Check that the playlist JSON isn't null
     if (playlistJson.isNull())
     {
-        qDebug() << "Unable to parse playlist " << playlist->getName() << ".";
-        return;
+        qDebug().nospace() << "Unable to parse playlist " << playlist->getName() << ".";
+        return false;
+    }
+
+    if (!playlistJson.isArray())
+    {
+        qDebug().nospace() << "An error occurred while reading playlist " << playlist->getName() << ".";
+        qDebug().nospace() << "Main JSON object of playlist " << playlist->getName() << " is not an array.";
+        return false;
     }
 
     // Iterate over the JSON document's array, adding all of the sounds to the playlist struct's sounds vector
     for (QJsonValue soundJson : playlistJson.array())
     {
-        QJsonObject soundJsonObject = soundJson.toObject();
-        WNLSound sound;
+        try
+        {
+            if (!soundJson.isObject())
+                throw std::ios_base::failure("Cannot parse array item as object");
+            QJsonObject soundJsonObject = soundJson.toObject();
 
-        sound.setTitle(soundJsonObject.value("title").toString());
-        sound.setFilePath(soundJsonObject.value("filePath").toString());
+            WNLSound sound;
 
-        playlist->addSound(sound);
+            if (soundJsonObject.value("title").isUndefined() || !soundJsonObject.value("title").isString())
+                throw std::ios_base::failure("Cannot parse sound title, it is either undefined or not a string");
+            sound.setTitle(soundJsonObject.value("title").toString());
+
+            if (soundJsonObject.value("filePath").isUndefined() || !soundJsonObject.value("filePath").isString())
+                throw std::ios_base::failure("Cannot parse sound file path, it is either undefined or not a string");
+            sound.setFilePath(soundJsonObject.value("filePath").toString());
+
+            playlist->addSound(sound);
+        }
+        catch (const std::ios_base::failure& e)
+        {
+            qDebug().nospace() << "An error occurred while reading playlist " << playlist->getName() << ".";
+            qDebug().nospace() << e.what() << ".";
+            qDebug() << "Manually modifying playlist files is not recommended.";
+            continue;
+        }
     }
+
+    return true;
 }
