@@ -45,6 +45,9 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
     // Create a JSON array for holding the all the sounds in the playlist
     QJsonArray playlistSounds;
 
+    // Create a WNLPlaylist object for the playlist
+    WNLPlaylist playlist;
+
     // Insert every sound in the vector into the JSON array
     for (WNLSound sound : sounds)
     {
@@ -57,6 +60,9 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
 
         // Add the sound object to the JSON array
         playlistSounds.append(QJsonValue(soundObject));
+
+        // Add the sound to the WNLPlaylist object's vector of sounds
+        playlist.addSound(sound);
     }
 
     // Create a new JSON document for the playlist
@@ -81,7 +87,8 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
         playlistFile.close();
 
         // Emit the playlist added signal
-        WNLPlaylist playlist(name, this->playlistsPath + QDir::separator() + name + ".json");
+        playlist.setName(name);
+        playlist.setFilePath(this->playlistsPath + QDir::separator() + name + ".json");
         emit playlistAdded(playlist);
     }
     else

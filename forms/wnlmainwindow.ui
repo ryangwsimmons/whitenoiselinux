@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2021 Ryan Simmons -->
-<!-- This program is distributed under the terms of the GNU General Public License Version 3 -->
 <ui version="4.0">
  <class>WNLMainWindow</class>
  <widget class="QMainWindow" name="WNLMainWindow">
@@ -70,7 +68,7 @@
           <bool>true</bool>
          </property>
          <property name="sizeAdjustPolicy">
-          <enum>QComboBox::AdjustToContents</enum>
+          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
          </property>
          <property name="minimumContentsLength">
           <number>0</number>
@@ -79,6 +77,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="saveButton">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="baseSize">
           <size>
            <width>0</width>
@@ -95,6 +96,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="loadButton">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="baseSize">
           <size>
            <width>0</width>
@@ -111,6 +115,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="deleteButton">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -132,7 +139,7 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line">
+        <widget class="Line" name="separatorLine">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
