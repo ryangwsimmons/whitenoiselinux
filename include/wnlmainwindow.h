@@ -14,6 +14,7 @@
 #include <QString>
 #include <QStringLiteral>
 #include <QVariant>
+#include <QVector>
 
 #include "wnlaboutdialog.h"
 #include "wnlmprismediaplayer2adaptor.h"
@@ -69,5 +70,8 @@ private:
 
     void setupDBus();
     void setupPlaylists();
+    void addSound(int row);
+    void rmSound(int row);
+    void loadPlaylist(WNLPlaylist playlist);
 };
 #endif // WNLMAINWINDOW_H

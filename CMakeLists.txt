@@ -8,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Core Gui Widgets DBus REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets DBus Concurrent REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(TagLib REQUIRED IMPORTED_TARGET taglib)
@@ -62,4 +62,4 @@ set(RESOURCES
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${MOC_HEADERS} ${UIS} ${RESOURCES})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus PkgConfig::TagLib PkgConfig::PortAudio PkgConfig::SndFile)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus Qt5::Concurrent PkgConfig::TagLib PkgConfig::PortAudio PkgConfig::SndFile)

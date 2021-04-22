@@ -95,18 +95,27 @@ void WNLMainWindow::on_addSoundButton_clicked()
     // Move all selected sounds to the "currently playing" list
     for (QModelIndex selectedIndex : availSoundsSelect->selectionModel()->selectedIndexes())
     {
-        // Remove item from the available sounds list
-        QListWidgetItem* selectedItem = availSoundsSelect->takeItem(selectedIndex.row());
-
-        // Add the item to the currently playing list
-        currSoundsSelect->addItem(selectedItem);
-
-        // Open the sound and add it to the list of currently playing sounds
-        this->playbackManager.addSound(selectedItem->data(Qt::UserRole).value<WNLSound>());
+        this->addSound(selectedIndex.row());
     }
 
     // Update the MPRIS track title value
     this->playerAdaptor->setTrackTitle(this->playbackManager.getCurrentlyPlayingString());
+}
+
+void WNLMainWindow::addSound(int row)
+{
+    // Get pointers to both lists
+    QListWidget* availSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively);
+    QListWidget* currSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively);
+
+    // Remove item from the available sounds list
+    QListWidgetItem* selectedItem = availSoundsSelect->takeItem(row);
+
+    // Add the item to the currently playing list
+    currSoundsSelect->addItem(selectedItem);
+
+    // Open the sound and add it to the list of currently playing sounds
+    this->playbackManager.addSound(selectedItem->data(Qt::UserRole).value<WNLSound>());
 }
 
 void WNLMainWindow::on_rmSoundButton_clicked()
@@ -118,18 +127,27 @@ void WNLMainWindow::on_rmSoundButton_clicked()
     // Move all selected sounds to the "available sounds" list
     for (QModelIndex selectedIndex : currSoundsSelect->selectionModel()->selectedIndexes())
     {
-        // Remove item from the currently playing list
-        QListWidgetItem* selectedItem = currSoundsSelect->takeItem(selectedIndex.row());
-
-        // Add the item to the available sounds list
-        availSoundsSelect->addItem(selectedItem);
-
-        // Remove the sound from the playback manager
-        this->playbackManager.rmSound(selectedIndex.row());
+        this->rmSound(selectedIndex.row());
     }
 
     // Update the MPRIS track title value
     this->playerAdaptor->setTrackTitle(this->playbackManager.getCurrentlyPlayingString());
+}
+
+void WNLMainWindow::rmSound(int row)
+{
+    // Get pointers to both lists
+    QListWidget* currSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively);
+    QListWidget* availSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively);
+
+    // Remove item from the currently playing list
+    QListWidgetItem* selectedItem = currSoundsSelect->takeItem(row);
+
+    // Add the item to the available sounds list
+    availSoundsSelect->addItem(selectedItem);
+
+    // Remove the sound from the playback manager
+    this->playbackManager.rmSound(row);
 }
 
 void WNLMainWindow::on_currSoundsSelect_itemSelectionChanged()
@@ -278,5 +296,59 @@ void WNLMainWindow::setupPlaylists()
 
 void WNLMainWindow::on_loadButton_clicked()
 {
+    // Get a pointer for the playlist combo box
+    QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
 
+    // Asynchronously run the method to load a playlist
+    QtConcurrent::run(this, &WNLMainWindow::loadPlaylist, playlistComboBox->currentData().value<WNLPlaylist>());
+
+    // Clear focus
+    this->ui->centralwidget->setFocus();
+}
+
+void WNLMainWindow::loadPlaylist(WNLPlaylist playlist)
+{
+    // Get pointers to both lists
+    QListWidget* currSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("currSoundsSelect", Qt::FindChildrenRecursively);
+    QListWidget* availSoundsSelect = ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively);
+
+    // Get a pointer for the playlist combo box
+    QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
+
+    int currCount = currSoundsSelect->count();
+
+    // Remove all sounds currently playing
+    for (int i = 0; i < currCount; i++)
+    {
+        this->rmSound(0);
+    }
+
+    // Add all the available items in the list widget to a list (for some reason, Qt doesn't provide a function to get this)
+    QVector<QListWidgetItem*> availableListItems;
+    for (int i = 0; i < availSoundsSelect->count(); i++)
+    {
+        availableListItems.append(availSoundsSelect->item(i));
+    }
+
+    // Add all of the sounds in the selected playlist to the currently playing list
+    for (WNLSound sound : playlistComboBox->currentData(Qt::UserRole).value<WNLPlaylist>().getSounds())
+    {
+        // Filter the list of items to get the item that corresponds to the current sound from the playlist
+        // Since there's the possibility that two different sound files have the same title property, we need to compare their file paths as well, instead of just their titles
+        // This unfortunately complicates the logic in this section since we can't just run availSoundsSelect->findItems()
+        QVector<QListWidgetItem*> resultingSoundList = QVector<QListWidgetItem*>::fromList(QtConcurrent::blockingFiltered(availableListItems, [=](const QListWidgetItem* item)
+        {
+            return item->data(Qt::UserRole).value<WNLSound>() == sound;
+        }).toList());
+
+        // If the sound was not found, print an error message, otherwise add it to the currently playing sounds
+        if (resultingSoundList.size() == 0)
+        {
+            qDebug() << "Unable to find file " << sound.getFilePath() << ".";
+        }
+        else
+        {
+            this->addSound(availSoundsSelect->row(resultingSoundList.at(0)));
+        }
+    }
 }

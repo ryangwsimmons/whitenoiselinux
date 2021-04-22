@@ -30,3 +30,8 @@ void WNLSound::setFilePath(QString filePath)
 {
     this->filePath = filePath;
 }
+
+bool WNLSound::operator == (const WNLSound& rhs)
+{
+    return this->getTitle() == rhs.getTitle() && this->getFilePath() == rhs.getFilePath();
+}

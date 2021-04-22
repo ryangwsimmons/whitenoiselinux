@@ -13,6 +13,7 @@ public:
     void setTitle(QString title);
     QString getFilePath() const;
     void setFilePath(QString filePath);
+    bool operator == (const WNLSound& rhs);
 
 private:
     QString title;
