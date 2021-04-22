@@ -1,3 +1,6 @@
+// Copyright 2021 Ryan Simmons
+// This program is distributed under the terms of the GNU General Public License Version 3
+
 #ifndef WNLMAINWINDOW_H
 #define WNLMAINWINDOW_H
 

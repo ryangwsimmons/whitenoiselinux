@@ -1,3 +1,6 @@
+// Copyright 2021 Ryan Simmons
+// This program is distributed under the terms of the GNU General Public License Version 3
+
 #include "wnlmprismediaplayer2adaptor.h"
 
 WNLMPRISMediaPlayer2Adaptor::WNLMPRISMediaPlayer2Adaptor(QObject* object)

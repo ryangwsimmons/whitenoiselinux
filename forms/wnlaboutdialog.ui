@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2021 Ryan Simmons -->
+<!-- This program is distributed under the terms of the GNU General Public License Version 3 -->
 <ui version="4.0">
  <class>WNLAboutDialog</class>
  <widget class="QDialog" name="WNLAboutDialog">

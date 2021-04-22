@@ -1,3 +1,6 @@
+// Copyright 2021 Ryan Simmons
+// This program is distributed under the terms of the GNU General Public License Version 3
+
 #ifndef WNLMPRISMEDIAPLAYER2ADAPTOR_H
 #define WNLMPRISMEDIAPLAYER2ADAPTOR_H
 
