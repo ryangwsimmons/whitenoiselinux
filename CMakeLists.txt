@@ -26,6 +26,7 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ./forms)
 set(SOURCES
     ./src/main.cpp
     ./src/wnlaboutdialog.cpp
+    ./src/wnlattributionsdialog.cpp
     ./src/wnlmainwindow.cpp
     ./src/wnlmprismediaplayer2adaptor.cpp
     ./src/wnlmprismediaplayer2playeradaptor.cpp
@@ -40,11 +41,13 @@ set(SOURCES
 
 set(UIS
     ./forms/wnlaboutdialog.ui
+    ./forms/wnlattributionsdialog.ui
     ./forms/wnlmainwindow.ui
 )
 
 set(MOC_HEADERS
     ./include/wnlaboutdialog.h
+    ./include/wnlattributionsdialog.h
     ./include/wnlmainwindow.h
     ./include/wnlmprismediaplayer2adaptor.h
     ./include/wnlmprismediaplayer2playeradaptor.h

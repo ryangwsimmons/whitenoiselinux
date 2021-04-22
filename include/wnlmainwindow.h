@@ -14,6 +14,7 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QString>
 #include <QStringLiteral>
 #include <QVariant>

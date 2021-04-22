@@ -6,8 +6,10 @@
 
 #include <QDialog>
 #include <QSize>
+#include <Qt>
 
 #include "config.h"
+#include "wnlattributionsdialog.h"
 
 namespace Ui {
 class WNLAboutDialog;
@@ -20,6 +22,9 @@ class WNLAboutDialog : public QDialog
 public:
     explicit WNLAboutDialog(QWidget *parent = nullptr);
     ~WNLAboutDialog();
+
+private slots:
+    void on_attributionsLabel_linkActivated(const QString &link);
 
 private:
     Ui::WNLAboutDialog *ui;

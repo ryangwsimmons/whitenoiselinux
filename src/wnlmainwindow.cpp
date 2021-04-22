@@ -256,11 +256,19 @@ void WNLMainWindow::on_deleteButton_clicked()
     // Get the WNLPlaylist object for the currently selected playlist
     WNLPlaylist deletedPlaylist = playlistComboBox->currentData(Qt::UserRole).value<WNLPlaylist>();
 
-    // Remove the playlist from the playlist manager and delete it from disk
-    if (this->playlistManager.deletePlaylist(deletedPlaylist))
+    // Display a message box, where the user confirms whether or not they want to delete the playlist
+    QMessageBox::StandardButton response;
+    response = QMessageBox::question(this, "Delete Playlist", "Are you sure you wish to delete playlist \"" + deletedPlaylist.getName() + "\"?", QMessageBox::Yes | QMessageBox::No);
+
+    // If the user clicked yes, delete the playlist
+    if (response == QMessageBox::Yes)
     {
-        // Remove the playlist from the playlist combo box
-        playlistComboBox->removeItem(playlistComboBox->currentIndex());
+        // Remove the playlist from the playlist manager and delete it from disk
+        if (this->playlistManager.deletePlaylist(deletedPlaylist))
+        {
+            // Remove the playlist from the playlist combo box
+            playlistComboBox->removeItem(playlistComboBox->currentIndex());
+        }
     }
 
     // Clear focus

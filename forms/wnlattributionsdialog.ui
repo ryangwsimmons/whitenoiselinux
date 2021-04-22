@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WNLAttributionsDialog</class>
+ <widget class="QDialog" name="WNLAttributionsDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>523</width>
+    <height>143</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Attributions</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="attributionsLabel">
+     <property name="styleSheet">
+      <string notr="true">margin: 5;</string>
+     </property>
+     <property name="text">
+      <string>The following images were used to create the icon for this app:
+- [Tux-flat.svg](https://commons.wikimedia.org/wiki/File:Tux-flat.svg) by Josef Norlin (Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode))
+- [Icon of Black Headphones](https://commons.wikimedia.org/wiki/File:Headphones_icon.svg) by Marek Mazurkiewicz (Licensed under [CC0 1.0](https://commons.wikimedia.org/wiki/File:Headphones_icon.svg))
+- [Waveform](https://thenounproject.com/term/waveform/165177/) by Jack Zwanenburg (Licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/legalcode))
+
+All of these images were modified in order to create the icon.</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::MarkdownText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
