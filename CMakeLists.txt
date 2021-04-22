@@ -31,8 +31,10 @@ set(SOURCES
     ./src/wnlmprismediaplayer2playeradaptor.cpp
     ./src/wnlmprismetadatamap.cpp
     ./src/wnlplaybackmanager.cpp
+    ./src/wnlplaylist.cpp
     ./src/wnlplaylistmanager.cpp
     ./src/wnlplaylistmanager.cpp
+    ./src/wnlsound.cpp
     ./src/wnlsoundgrabber.cpp
 )
 
@@ -47,8 +49,8 @@ set(MOC_HEADERS
     ./include/wnlmprismediaplayer2adaptor.h
     ./include/wnlmprismediaplayer2playeradaptor.h
     ./include/wnlmprismetadatamap.h
-    ./include/wnlplaylist.h
     ./include/wnlplaybackmanager.h
+    ./include/wnlplaylist.h
     ./include/wnlplaylistmanager.h
     ./include/wnlsound.h
     ./include/wnlsoundgrabber.h

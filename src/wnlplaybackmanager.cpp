@@ -97,12 +97,12 @@ void WNLPlaybackManager::addSound(WNLSound sound)
     SF_INFO fileInfo = {0, 0, 0, 0, 0, 0};
 
     // Use libsndfile to open the sound file
-    SNDFILE* file = sf_open(sound.fileName.toLatin1().data(), SFM_READ, &fileInfo);
+    SNDFILE* file = sf_open(sound.getFilePath().toLatin1().data(), SFM_READ, &fileInfo);
 
     // If read was unsuccessful, print the reason why to console and return
     if (file == NULL)
     {
-        qDebug() << "Encountered an error opening the file " << sound.fileName << ".";
+        qDebug() << "Encountered an error opening the file " << sound.getFilePath() << ".";
         qDebug() << sf_strerror(NULL);
         return;
     }
@@ -168,7 +168,7 @@ QString WNLPlaybackManager::getCurrentlyPlayingString() const
     // Add the name of each currently playing sound to the string list
     for (WNLSoundInfo soundInfo : this->playingSounds)
     {
-        playingNames.append(soundInfo.sound.name);
+        playingNames.append(soundInfo.sound.getTitle());
     }
 
     // Return a string containing the names of all the sounds playing, separated by ", "

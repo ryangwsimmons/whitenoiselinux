@@ -4,11 +4,19 @@
 #include <QObject>
 #include <QString>
 
-// Define a struct for storing sounds
-struct WNLSound
+class WNLSound
 {
-    QString name;
-    QString fileName;
+public:
+    WNLSound();
+    WNLSound(QString title, QString filePath);
+    QString getTitle() const;
+    void setTitle(QString title);
+    QString getFilePath() const;
+    void setFilePath(QString filePath);
+
+private:
+    QString title;
+    QString filePath;
 };
 Q_DECLARE_METATYPE(WNLSound)
 

@@ -58,6 +58,8 @@ private slots:
 
     void addPlaylist(WNLPlaylist newPlaylist);
 
+    void on_loadButton_clicked();
+
 private:
     Ui::WNLMainWindow *ui;
     WNLPlaybackManager playbackManager;

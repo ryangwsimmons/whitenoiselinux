@@ -49,8 +49,8 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
         QJsonObject soundObject;
 
         // Add the name of the sound and its path to the object
-        soundObject.insert("title", QJsonValue(sound.name));
-        soundObject.insert("filePath", QJsonValue(sound.fileName));
+        soundObject.insert("title", QJsonValue(sound.getTitle()));
+        soundObject.insert("filePath", QJsonValue(sound.getFilePath()));
 
         // Add the sound object to the JSON array
         playlistSounds.append(QJsonValue(soundObject));
@@ -78,7 +78,7 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
         playlistFile.close();
 
         // Emit the playlist added signal
-        WNLPlaylist playlist = {name, this->playlistsPath + QDir::separator() + name + ".json"};
+        WNLPlaylist playlist(name, this->playlistsPath + QDir::separator() + name + ".json");
         emit playlistAdded(playlist);
     }
     else
@@ -90,17 +90,10 @@ void WNLPlaylistManager::savePlaylist(QString name, QVector<WNLSound> sounds)
 bool WNLPlaylistManager::deletePlaylist(WNLPlaylist deletedPlaylist)
 {
     // Remove the playlist from the vector of playlists in this object
-    // The built-in functions to do this sort of thing with QVectors don't work with structs, so I have to do it this way
-    for (int i = 0; i < this->playlists.size(); i++)
-    {
-        if (this->playlists.at(i).name == deletedPlaylist.name && this->playlists.at(i).filePath == deletedPlaylist.filePath)
-        {
-            this->playlists.remove(i);
-        }
-    }
+    this->playlists.removeOne(deletedPlaylist);
 
     // Remove the playlist file from disk
-    return QFile::remove(deletedPlaylist.filePath);
+    return QFile::remove(deletedPlaylist.getFilePath());
 }
 
 QVector<WNLPlaylist> WNLPlaylistManager::getPlaylists()
@@ -111,12 +104,12 @@ QVector<WNLPlaylist> WNLPlaylistManager::getPlaylists()
 void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
 {
     // Create a QFile object for the playlist file
-    QFile playlistFile(playlist->filePath);
+    QFile playlistFile(playlist->getFilePath());
 
     // Open the playlist file (if this fails, print a debug message)
     if (!playlistFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Unable to read playlist " << playlist->name << ".";
+        qDebug() << "Unable to read playlist " << playlist->getName() << ".";
         return;
     }
 
@@ -132,7 +125,7 @@ void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
     // Check that the playlist JSON isn't null
     if (playlistJson.isNull())
     {
-        qDebug() << "Unable to parse playlist " << playlist->name << ".";
+        qDebug() << "Unable to parse playlist " << playlist->getName() << ".";
         return;
     }
 
@@ -142,9 +135,9 @@ void WNLPlaylistManager::grabPlaylistSounds(WNLPlaylist* playlist)
         QJsonObject soundJsonObject = soundJson.toObject();
         WNLSound sound;
 
-        sound.name = soundJsonObject.value("title").toString();
-        sound.fileName = soundJsonObject.value("filePath").toString();
+        sound.setTitle(soundJsonObject.value("title").toString());
+        sound.setFilePath(soundJsonObject.value("filePath").toString());
 
-        playlist->sounds.append(sound);
+        playlist->addSound(sound);
     }
 }

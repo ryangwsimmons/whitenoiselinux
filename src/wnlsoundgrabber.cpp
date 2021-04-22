@@ -50,7 +50,7 @@ QVector<WNLSound> WNLSoundGrabber::getSounds() const
             }
 
             // Create a new WNLSound struct for the sound
-            WNLSound sound = {soundTitle, soundsDir.absoluteFilePath(soundFilePath)};
+            WNLSound sound(soundTitle, soundsDir.absoluteFilePath(soundFilePath));
 
             // Append the struct to the sounds vector
             sounds.append(sound);

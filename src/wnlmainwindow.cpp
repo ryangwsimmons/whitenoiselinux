@@ -18,7 +18,7 @@ WNLMainWindow::WNLMainWindow(QWidget *parent)
         // Once the available sounds have been read from disk, add them to the available sounds widget
         for (WNLSound sound : soundsFutureWatcher->result())
         {
-            QListWidgetItem* soundItem = new QListWidgetItem(sound.name);
+            QListWidgetItem* soundItem = new QListWidgetItem(sound.getTitle());
             soundItem->setData(Qt::UserRole, QVariant::fromValue<WNLSound>(sound));
             ui->soundSelectionWidget->findChild<QListWidget *>("availSoundsSelect", Qt::FindChildrenRecursively)->addItem(soundItem);
         }
@@ -241,6 +241,9 @@ void WNLMainWindow::on_deleteButton_clicked()
         // Remove the playlist from the playlist combo box
         playlistComboBox->removeItem(playlistComboBox->currentIndex());
     }
+
+    // Clear focus
+    this->ui->centralwidget->setFocus();
 }
 
 void WNLMainWindow::addPlaylist(WNLPlaylist newPlaylist)
@@ -249,7 +252,7 @@ void WNLMainWindow::addPlaylist(WNLPlaylist newPlaylist)
     QComboBox* playlistComboBox = ui->topBarWidget->findChild<QComboBox *>("playlistComboBox", Qt::FindChildrenRecursively);
 
     // Add the new playlist to the combo box
-    playlistComboBox->addItem(newPlaylist.name, QVariant::fromValue<WNLPlaylist>(newPlaylist));
+    playlistComboBox->addItem(newPlaylist.getName(), QVariant::fromValue<WNLPlaylist>(newPlaylist));
 }
 
 void WNLMainWindow::setupPlaylists()
@@ -266,9 +269,14 @@ void WNLMainWindow::setupPlaylists()
     // Add each playlist to the combo box
     for (WNLPlaylist playlist : this->playlistManager.getPlaylists())
     {
-        playlistComboBox->addItem(playlist.name, QVariant::fromValue<WNLPlaylist>(playlist));
+        playlistComboBox->addItem(playlist.getName(), QVariant::fromValue<WNLPlaylist>(playlist));
     }
 
     // Connect the playlist added signal to the add playlist method
     connect(&(this->playlistManager), &WNLPlaylistManager::playlistAdded, this, &WNLMainWindow::addPlaylist);
+}
+
+void WNLMainWindow::on_loadButton_clicked()
+{
+
 }
