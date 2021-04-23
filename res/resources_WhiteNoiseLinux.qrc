@@ -1,7 +1,6 @@
 <RCC>
-    <qresource prefix="/images">
-        <file alias="logo_square">images/logo_square.svg</file>
-        <file alias="logo">images/logo.svg</file>
+    <qresource prefix="/">
+        <file>images/logo.png</file>
+        <file>images/logo.svg</file>
     </qresource>
-    <qresource prefix="/"/>
 </RCC>

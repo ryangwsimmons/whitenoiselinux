@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Attributions</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/resources_WhiteNoiseLinux.qrc">
+    <normaloff>:/images/logo.png</normaloff>:/images/logo.png</iconset>
+  </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
@@ -52,6 +56,8 @@ All of these images were modified in order to create the icon.</string>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/resources_WhiteNoiseLinux.qrc"/>
+ </resources>
  <connections/>
 </ui>

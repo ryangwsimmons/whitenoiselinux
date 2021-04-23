@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../res/resources_WhiteNoiseLinux.qrc">
-    <normaloff>:/images/logo_square</normaloff>:/images/logo_square</iconset>
+    <normaloff>:/images/logo.png</normaloff>:/images/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -52,7 +52,7 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>148</width>
+       <width>183</width>
        <height>183</height>
       </size>
      </property>
@@ -69,7 +69,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../res/resources_WhiteNoiseLinux.qrc">:/images/logo</pixmap>
+      <pixmap resource="../res/resources_WhiteNoiseLinux.qrc">:/images/logo.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -101,7 +101,7 @@
       <string notr="true">margin-bottom: 5;</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;An application for playing white noise (and other ambient sound) audio files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;A white noise (and other ambient sound) audio player.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
