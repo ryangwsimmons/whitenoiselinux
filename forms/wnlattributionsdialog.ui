@@ -33,15 +33,16 @@
       <string notr="true">margin: 5;</string>
      </property>
      <property name="text">
-      <string>The following images were used to create the icon for this app:
-- [Tux-flat.svg](https://commons.wikimedia.org/wiki/File:Tux-flat.svg) by Josef Norlin (Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode))
-- [Icon of Black Headphones](https://commons.wikimedia.org/wiki/File:Headphones_icon.svg) by Marek Mazurkiewicz (Licensed under [CC0 1.0](https://commons.wikimedia.org/wiki/File:Headphones_icon.svg))
-- [Waveform](https://thenounproject.com/term/waveform/165177/) by Jack Zwanenburg (Licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/legalcode))
-
-All of these images were modified in order to create the icon.</string>
+      <string>&lt;p&gt;The following images were used to create the icon for this app:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Tux-flat.svg&quot;&gt;Tux-flat.svg&lt;/a&gt; by Josef Norlin (Licensed under &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/legalcode&quot;&gt;CC BY-SA 4.0&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Headphones_icon.svg&quot;&gt;Icon of Black Headphones&lt;/a&gt; by Marek Mazurkiewicz (Licensed under &lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Headphones_icon.svg&quot;&gt;CC0 1.0&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://thenounproject.com/term/waveform/165177/&quot;&gt;Waveform&lt;/a&gt; by Jack Zwanenburg (Licensed under &lt;a href=&quot;https://creativecommons.org/licenses/by/3.0/us/legalcode&quot;&gt;CC BY 3.0 US&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of these images were modified in order to create the icon.&lt;/p&gt;</string>
      </property>
      <property name="textFormat">
-      <enum>Qt::MarkdownText</enum>
+      <enum>Qt::AutoText</enum>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
