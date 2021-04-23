@@ -23,7 +23,7 @@ WNLMPRISMediaPlayer2PlayerAdaptor::WNLMPRISMediaPlayer2PlayerAdaptor(QObject* ob
     qDBusRegisterMetaType<WNLMPRISMetadataMap>();
 
     // Set up the initial metadata map
-    this->Metadata.insert("mpris:trackid", QDBusVariant(QDBusObjectPath("/org/mpris/MediaPlayer2/CurrentlyPlaying")));
+    this->Metadata.insert("mpris:trackid", QDBusVariant(QVariant::fromValue<QDBusObjectPath>(QDBusObjectPath("/org/mpris/MediaPlayer2/CurrentlyPlaying"))));
     this->Metadata.insert("xesam:artist", QDBusVariant(QStringList("WhiteNoiseLinux")));
     this->Metadata.insert("xesam:title", QDBusVariant("No Sounds Selected"));
 }
