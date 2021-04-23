@@ -37,39 +37,39 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ./forms)
 
 # Set variables for the different types of source files
 set(SOURCES
-    ./src/main.cpp
-    ./src/wnlaboutdialog.cpp
-    ./src/wnlattributionsdialog.cpp
-    ./src/wnlmainwindow.cpp
-    ./src/wnlmprismediaplayer2adaptor.cpp
-    ./src/wnlmprismediaplayer2playeradaptor.cpp
-    ./src/wnlmprismetadatamap.cpp
-    ./src/wnlplaybackmanager.cpp
-    ./src/wnlplaylist.cpp
-    ./src/wnlplaylistmanager.cpp
-    ./src/wnlplaylistmanager.cpp
-    ./src/wnlsound.cpp
-    ./src/wnlsoundgrabber.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/main.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlaboutdialog.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlattributionsdialog.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmainwindow.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmprismediaplayer2adaptor.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmprismediaplayer2playeradaptor.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmprismetadatamap.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaybackmanager.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaylist.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaylistmanager.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaylistmanager.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlsound.cpp
+    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlsoundgrabber.cpp
 )
 
 set(UIS
-    ./forms/wnlaboutdialog.ui
-    ./forms/wnlattributionsdialog.ui
-    ./forms/wnlmainwindow.ui
+    ${WhiteNoiseLinux_SOURCE_DIR}/forms/wnlaboutdialog.ui
+    ${WhiteNoiseLinux_SOURCE_DIR}/forms/wnlattributionsdialog.ui
+    ${WhiteNoiseLinux_SOURCE_DIR}/forms/wnlmainwindow.ui
 )
 
 set(MOC_HEADERS
-    ./include/wnlaboutdialog.h
-    ./include/wnlattributionsdialog.h
-    ./include/wnlmainwindow.h
-    ./include/wnlmprismediaplayer2adaptor.h
-    ./include/wnlmprismediaplayer2playeradaptor.h
-    ./include/wnlmprismetadatamap.h
-    ./include/wnlplaybackmanager.h
-    ./include/wnlplaylist.h
-    ./include/wnlplaylistmanager.h
-    ./include/wnlsound.h
-    ./include/wnlsoundgrabber.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlaboutdialog.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlattributionsdialog.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmainwindow.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmprismediaplayer2adaptor.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmprismediaplayer2playeradaptor.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmprismetadatamap.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlplaybackmanager.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlplaylist.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlplaylistmanager.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlsound.h
+    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlsoundgrabber.h
 )
 
 set(RESOURCES
@@ -80,3 +80,8 @@ set(RESOURCES
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${MOC_HEADERS} ${UIS} ${RESOURCES})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus Qt5::Concurrent PkgConfig::TagLib PkgConfig::PortAudio PkgConfig::SndFile)
+
+# Define locations for installation
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
+install(DIRECTORY ${WhiteNoiseLinux_SOURCE_DIR}/res/icons/ DESTINATION "share/icons/hicolor")
+install(FILES ${WhiteNoiseLinux_SOURCE_DIR}/res/WhiteNoiseLinux.desktop DESTINATION "share/applications")
