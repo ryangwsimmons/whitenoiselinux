@@ -68,7 +68,7 @@ Use the latest provided package for your distro, available on the [releases](htt
    make
    ```
 
-6. Once this process completes, you should have an executable called `WhiteNoiseLinux` in the `build` directory. From this point, while you should just be able to place this executable anywhere, I would strongly recommend using this executable to create a software package for your specific distro. Details regarding how to do this can be readily found online.
+6. Once this process completes, you should have an executable called `WhiteNoiseLinux` in the `build` directory. From this point, while you should just be able to place this executable anywhere, I would strongly recommend using this executable to create a software package for your specific distro. Details regarding how to do this can be readily found online. If you really insist on not doing this, you can also run `sudo make install` to install the application files to the `/usr/local` installation prefix.
 
 ## Attributions
 
