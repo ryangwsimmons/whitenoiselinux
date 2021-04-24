@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(WhiteNoiseLinux VERSION 2.0.1)
+project(WhiteNoiseLinux VERSION 2.0.2)
 
 # Turn on all necessary processes for Qt to work
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

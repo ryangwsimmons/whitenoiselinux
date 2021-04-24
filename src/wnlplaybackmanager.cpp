@@ -88,6 +88,15 @@ int WNLPlaybackManager::paMethod(float* out, unsigned long framesPerBuffer)
         if (bytesRead == 0)
         {
             sf_seek(sound.file, 0, SEEK_SET);
+
+            // Read the sound file's data out as a float to the output buffer
+            int bytesRead = sf_readf_float(sound.file, tempBuffer, framesPerBuffer);
+
+            // Add the sound to the output buffer (reducing volume to prevent peaking)
+            for (unsigned long i = 0; i < framesPerBuffer * this->numChannels; i++)
+            {
+                out[i] += tempBuffer[i] * (1.0 / this->playingSounds.size());
+            }
         }
     }
 

@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=WhiteNoiseLinux
+GenericName=White Noise Audio Player
 Type=Application
-Exec=/usr/bin/WhiteNoiseLinux
+Exec=WhiteNoiseLinux
 Terminal=false
 Categories=Audio;AudioVideo
 Version=1.0
