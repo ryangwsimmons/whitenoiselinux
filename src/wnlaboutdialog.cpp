@@ -11,7 +11,7 @@ WNLAboutDialog::WNLAboutDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(300, 600);
     this->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-    this->ui->versionLabel->setText(QString("<html><head/><body><p align=\"center\" style=\"font-weight: 600;\">Version %1.%2</p></body></html>").arg(VERSION_MAJOR).arg(VERSION_MINOR));
+    this->ui->versionLabel->setText(QString("<html><head/><body><p align=\"center\" style=\"font-weight: 600;\">Version %1.%2.%3</p></body></html>").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH));
 }
 
 WNLAboutDialog::~WNLAboutDialog()
