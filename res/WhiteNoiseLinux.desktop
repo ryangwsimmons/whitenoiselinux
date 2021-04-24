@@ -3,6 +3,6 @@ Name=WhiteNoiseLinux
 Type=Application
 Exec=/usr/bin/WhiteNoiseLinux
 Terminal=false
-Categories=Utility;Audio;AudioVideo
+Categories=Audio;AudioVideo
 Version=1.0
 Icon=WhiteNoiseLinux
