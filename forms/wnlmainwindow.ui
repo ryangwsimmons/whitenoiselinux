@@ -80,6 +80,12 @@
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
          <property name="baseSize">
           <size>
            <width>0</width>
@@ -98,6 +104,12 @@
         <widget class="QPushButton" name="loadButton">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
          </property>
          <property name="baseSize">
           <size>

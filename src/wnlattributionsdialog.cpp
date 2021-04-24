@@ -9,7 +9,7 @@ WNLAttributionsDialog::WNLAttributionsDialog(QWidget *parent) :
     ui(new Ui::WNLAttributionsDialog)
 {
     ui->setupUi(this);
-    this->setFixedSize(530, 150);
+    this->setFixedSize(530, 175);
     this->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
 }
 
