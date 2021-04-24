@@ -16,7 +16,6 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QString>
-#include <QStringLiteral>
 #include <QVariant>
 #include <QVector>
 
