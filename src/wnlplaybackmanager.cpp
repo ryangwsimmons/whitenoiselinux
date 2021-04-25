@@ -70,13 +70,13 @@ int WNLPlaybackManager::paMethod(float* out, unsigned long framesPerBuffer)
     }
 
     // Create temporary buffer for each of the sounds to be read to
-    float tempBuffer[framesPerBuffer * this->numChannels] = {0};
+    QVector<float> tempBuffer(framesPerBuffer * this->numChannels);
 
     // Iterate over every sound file, adding the file to the buffer
     for (WNLSoundInfo sound : this->playingSounds)
     {
         // Read the sound file's data out as a float to the output buffer
-        int bytesRead = sf_readf_float(sound.file, tempBuffer, framesPerBuffer);
+        int bytesRead = sf_readf_float(sound.file, tempBuffer.data(), framesPerBuffer);
 
         // Add the sound to the output buffer (reducing volume to prevent peaking)
         for (unsigned long i = 0; i < framesPerBuffer * this->numChannels; i++)
@@ -90,7 +90,7 @@ int WNLPlaybackManager::paMethod(float* out, unsigned long framesPerBuffer)
             sf_seek(sound.file, 0, SEEK_SET);
 
             // Read the sound file's data out as a float to the output buffer
-            int bytesRead = sf_readf_float(sound.file, tempBuffer, framesPerBuffer);
+            int bytesRead = sf_readf_float(sound.file, tempBuffer.data(), framesPerBuffer);
 
             // Add the sound to the output buffer (reducing volume to prevent peaking)
             for (unsigned long i = 0; i < framesPerBuffer * this->numChannels; i++)
