@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(WhiteNoiseLinux VERSION 2.0.2)
+project(whitenoiselinux VERSION 2.0.2)
 
 # Turn on all necessary processes for Qt to work
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -84,4 +84,4 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widg
 # Define locations for installation
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
 install(DIRECTORY ${WhiteNoiseLinux_SOURCE_DIR}/res/icons/ DESTINATION "share/icons/hicolor")
-install(FILES ${WhiteNoiseLinux_SOURCE_DIR}/res/WhiteNoiseLinux.desktop DESTINATION "share/applications")
+install(FILES ${WhiteNoiseLinux_SOURCE_DIR}/res/whitenoiselinux.desktop DESTINATION "share/applications")

@@ -2,8 +2,8 @@
 Name=WhiteNoiseLinux
 GenericName=White Noise Audio Player
 Type=Application
-Exec=WhiteNoiseLinux
+Exec=whitenoiselinux
 Terminal=false
 Categories=Audio;AudioVideo
 Version=1.0
-Icon=WhiteNoiseLinux
+Icon=whitenoiselinux
