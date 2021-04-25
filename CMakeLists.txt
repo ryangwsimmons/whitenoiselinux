@@ -37,39 +37,39 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ./forms)
 
 # Set variables for the different types of source files
 set(SOURCES
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/main.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlaboutdialog.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlattributionsdialog.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmainwindow.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmprismediaplayer2adaptor.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmprismediaplayer2playeradaptor.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlmprismetadatamap.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaybackmanager.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaylist.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaylistmanager.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlplaylistmanager.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlsound.cpp
-    ${WhiteNoiseLinux_SOURCE_DIR}/src/wnlsoundgrabber.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/main.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlaboutdialog.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlattributionsdialog.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlmainwindow.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlmprismediaplayer2adaptor.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlmprismediaplayer2playeradaptor.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlmprismetadatamap.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlplaybackmanager.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlplaylist.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlplaylistmanager.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlplaylistmanager.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlsound.cpp
+    ${whitenoiselinux_SOURCE_DIR}/src/wnlsoundgrabber.cpp
 )
 
 set(UIS
-    ${WhiteNoiseLinux_SOURCE_DIR}/forms/wnlaboutdialog.ui
-    ${WhiteNoiseLinux_SOURCE_DIR}/forms/wnlattributionsdialog.ui
-    ${WhiteNoiseLinux_SOURCE_DIR}/forms/wnlmainwindow.ui
+    ${whitenoiselinux_SOURCE_DIR}/forms/wnlaboutdialog.ui
+    ${whitenoiselinux_SOURCE_DIR}/forms/wnlattributionsdialog.ui
+    ${whitenoiselinux_SOURCE_DIR}/forms/wnlmainwindow.ui
 )
 
 set(MOC_HEADERS
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlaboutdialog.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlattributionsdialog.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmainwindow.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmprismediaplayer2adaptor.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmprismediaplayer2playeradaptor.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlmprismetadatamap.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlplaybackmanager.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlplaylist.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlplaylistmanager.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlsound.h
-    ${WhiteNoiseLinux_SOURCE_DIR}/include/wnlsoundgrabber.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlaboutdialog.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlattributionsdialog.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlmainwindow.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlmprismediaplayer2adaptor.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlmprismediaplayer2playeradaptor.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlmprismetadatamap.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlplaybackmanager.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlplaylist.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlplaylistmanager.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlsound.h
+    ${whitenoiselinux_SOURCE_DIR}/include/wnlsoundgrabber.h
 )
 
 set(RESOURCES
@@ -83,5 +83,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widg
 
 # Define locations for installation
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
-install(DIRECTORY ${WhiteNoiseLinux_SOURCE_DIR}/res/icons/ DESTINATION "share/icons/hicolor")
-install(FILES ${WhiteNoiseLinux_SOURCE_DIR}/res/whitenoiselinux.desktop DESTINATION "share/applications")
+install(DIRECTORY ${whitenoiselinux_SOURCE_DIR}/res/icons/ DESTINATION "share/icons/hicolor")
+install(FILES ${whitenoiselinux_SOURCE_DIR}/res/whitenoiselinux.desktop DESTINATION "share/applications")
