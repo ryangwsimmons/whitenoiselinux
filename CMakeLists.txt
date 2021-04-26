@@ -85,3 +85,4 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widg
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
 install(DIRECTORY ${whitenoiselinux_SOURCE_DIR}/res/icons/ DESTINATION "share/icons/hicolor")
 install(FILES ${whitenoiselinux_SOURCE_DIR}/res/whitenoiselinux.desktop DESTINATION "share/applications")
+install(FILES ${whitenoiselinux_SOURCE_DIR}/res/ca.ryangwsimmons.whitenoiselinux.metainfo.xml DESTINATION "share/metainfo")
