@@ -28,11 +28,11 @@ To obtain sounds, I'd recommend the following process:
 
 ### Distro Packages (Recommended)
 
-Use the latest provided package for your distro, available from the [OpenSUSE Build Service]([Install package home:ryangwsimmons:WhiteNoiseLinux / whitenoiselinux](https://software.opensuse.org//download.html?project=home%3Aryangwsimmons%3AWhiteNoiseLinux&package=whitenoiselinux)). Click the link, select your distro, and follow the instructions for adding the repository and installing manually. Unless you know what you're doing, don't just grab the binary packages, or else you won't get updates.
+Use the latest provided package for your distro, available from the [OpenSUSE Build Service](https://software.opensuse.org//download.html?project=home%3Aryangwsimmons%3AWhiteNoiseLinux&package=whitenoiselinux). Click the link, select your distro, and follow the instructions for adding the repository and installing manually. Unless you know what you're doing, don't just grab the binary packages, or else you won't get updates.
 
 ### AppImage
 
-AppImages are also available from the GitHub [releases page]([Releases · ryangwsimmons/whitenoiselinux · GitHub](https://github.com/ryangwsimmons/WhiteNoiseLinux/releases)). If your distro is not listed on the page at the OpenSUSE build service, this is the best option for using the application. To run the AppImage:
+AppImages are also available from the GitHub [releases page](https://github.com/ryangwsimmons/WhiteNoiseLinux/releases). If your distro is not listed on the page at the OpenSUSE build service, this is the best option for using the application. To run the AppImage:
 
 1. Download the latest `.AppImage` file from the GitHub releases page (linked above).
 
