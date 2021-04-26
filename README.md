@@ -28,11 +28,27 @@ To obtain sounds, I'd recommend the following process:
 
 ### Distro Packages (Recommended)
 
-Use the latest provided package for your distro, available on the [releases](https://github.com/ryangwsimmons/WhiteNoiseLinux/releases) page.
+Use the latest provided package for your distro, available from the [OpenSUSE Build Service]([Install package home:ryangwsimmons:WhiteNoiseLinux / whitenoiselinux](https://software.opensuse.org//download.html?project=home%3Aryangwsimmons%3AWhiteNoiseLinux&package=whitenoiselinux)). Click the link, select your distro, and follow the instructions for adding the repository and installing manually. Unless you know what you're doing, don't just grab the binary packages, or else you won't get updates.
+
+### AppImage
+
+AppImages are also available from the GitHub [releases page]([Releases · ryangwsimmons/whitenoiselinux · GitHub](https://github.com/ryangwsimmons/WhiteNoiseLinux/releases)). If your distro is not listed on the page at the OpenSUSE build service, this is the best option for using the application. To run the AppImage:
+
+1. Download the latest `.AppImage` file from the GitHub releases page (linked above).
+
+2. Open a terminal in the location the file downloaded to (usually your Downloads folder) and run the following:
+   
+   ```shell
+   chmod +x <name_of_file>.AppImage
+   ```
+   
+   After this, you should be able to run the program by simply opening the `.AppImage` file.
+
+3. (Optional) Add a menu entry for the application using [`appimaged`]([GitHub - probonopd/go-appimage: Go implementation of AppImage tools. Still experimental](https://github.com/probonopd/go-appimage)).
 
 ### Manual Installation
 
-1. Ensure you have all the dependencies for the application installed (methods will vary depending upon your distribution of choice):
+1. Ensure you have all the dependencies for the application installed (methods will vary depending upon your distribution of choice, you will need development files in addition to the normal library packages):
    
    - Qt 5 (including the Core, GUI, Widgets, D-Bus, and Concurrent components)
    
