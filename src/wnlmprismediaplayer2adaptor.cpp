@@ -9,7 +9,7 @@ WNLMPRISMediaPlayer2Adaptor::WNLMPRISMediaPlayer2Adaptor(QObject* object)
       CanRaise(false),
       HasTrackList(false),
       Identity("WhiteNoiseLinux"),
-      DesktopEntry("WhiteNoiseLinux"),
+      DesktopEntry("whitenoiselinux"),
       SupportedUriSchemes(QStringList()),
       SupportedMimeTypes(QStringList("application/ogg"))
 {

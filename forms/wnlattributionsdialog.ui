@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>523</width>
-    <height>143</height>
+    <height>173</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,6 +34,7 @@
      </property>
      <property name="text">
       <string>&lt;p&gt;The following images were used to create the icon for this app:&lt;/p&gt;
+&lt;p&gt;(If the links below don't work, you can right-click on each one to copy and paste its URL into a browser.)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Tux-flat.svg&quot;&gt;Tux-flat.svg&lt;/a&gt; by Josef Norlin (Licensed under &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/legalcode&quot;&gt;CC BY-SA 4.0&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Headphones_icon.svg&quot;&gt;Icon of Black Headphones&lt;/a&gt; by Marek Mazurkiewicz (Licensed under &lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Headphones_icon.svg&quot;&gt;CC0 1.0&lt;/a&gt;)&lt;/li&gt;
