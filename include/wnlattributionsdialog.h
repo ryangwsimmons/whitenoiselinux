@@ -5,6 +5,8 @@
 #define WNLATTRIBUTIONSDIALOG_H
 
 #include <QDialog>
+#include <QProcess>
+#include <QStringList>
 #include <Qt>
 
 namespace Ui {
@@ -18,6 +20,9 @@ class WNLAttributionsDialog : public QDialog
 public:
     explicit WNLAttributionsDialog(QWidget *parent = nullptr);
     ~WNLAttributionsDialog();
+
+private slots:
+    void on_attributionsLabel_linkActivated(const QString &link);
 
 private:
     Ui::WNLAttributionsDialog *ui;

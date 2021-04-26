@@ -5,7 +5,9 @@
 #define WNLABOUTDIALOG_H
 
 #include <QDialog>
+#include <QProcess>
 #include <QSize>
+#include <QStringList>
 #include <Qt>
 
 #include "config.h"
@@ -25,6 +27,8 @@ public:
 
 private slots:
     void on_attributionsLabel_linkActivated(const QString &link);
+
+    void on_licenseInfoLabel_linkActivated(const QString &link);
 
 private:
     Ui::WNLAboutDialog *ui;

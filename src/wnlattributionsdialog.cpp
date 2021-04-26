@@ -17,3 +17,12 @@ WNLAttributionsDialog::~WNLAttributionsDialog()
 {
     delete ui;
 }
+
+void WNLAttributionsDialog::on_attributionsLabel_linkActivated(const QString &link)
+{
+    // xdg-open has to be launched instead of Qt's default link-opening code, as it does not work with AppImages
+    QProcess* linkOpen = new QProcess();
+    QStringList arguments;
+    arguments << link;
+    linkOpen->start("xdg-open", arguments);
+}
