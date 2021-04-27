@@ -44,7 +44,7 @@ AppImages are also available from the GitHub [releases page](https://github.com/
    
    After this, you should be able to run the program by simply opening the `.AppImage` file.
 
-3. (Optional) Add a menu entry for the application using [`appimaged`]([GitHub - probonopd/go-appimage: Go implementation of AppImage tools. Still experimental](https://github.com/probonopd/go-appimage)).
+3. (Optional) Add a menu entry for the application using [`appimaged`](https://github.com/probonopd/go-appimage).
 
 ### Manual Installation
 
