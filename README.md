@@ -9,21 +9,6 @@ A Linux application written using Qt that plays white noise (and other ambient s
     <img src="screenshots/about.png?raw=true" width="400">
 </p>
 
-## Usage
-
-On first run, the app creates a `.whitenoiselinux` directory in your home directory. Inside this directory, there is another directory called `sounds`.
-
-Inside this directory, place the sounds you want. These sounds must be 2 channel (stereo) Ogg/Vorbis audio files. If an audio file has a title in its metadata, this title will be used instead of the file name in the interface.
-
-To obtain sounds, I'd recommend the following process:
-
-1. Go on YouTube, and search for "white noise".
-2. Find a few different sounds you like, and download the audio for them with [youtube-dl](https://youtube-dl.org/).
-3. Use [Audacity](https://www.audacityteam.org/) to trim the audio file down to around 2 minutes or so.
-4. Export this new, trimmed audio as an Ogg file.
-5. During the export process, you will be given the option to enter a "Track Title" for the file. You can enter the name you would like for the sound in this field.
-6. Save this audio file in the `~/.whitenoiselinux/sounds` directory.
-
 ## Installation
 
 ### Distro Packages (Recommended)
@@ -85,6 +70,21 @@ AppImages are also available from the GitHub [releases page](https://github.com/
    ```
 
 6. Once this process completes, you should have an executable called `WhiteNoiseLinux` in the `build` directory. From this point, while you should just be able to place this executable anywhere, I would strongly recommend using this executable to create a software package for your specific distro. Details regarding how to do this can be readily found online. If you really insist on not doing this, you can also run `sudo make install` to install the application files to the `/usr/local` installation prefix.
+
+## Usage
+
+On first run, the app creates a `.whitenoiselinux` directory in your home directory. Inside this directory, there is another directory called `sounds`.
+
+Inside this directory, place the sounds you want. These sounds must be 2 channel (stereo) Ogg/Vorbis audio files. If an audio file has a title in its metadata, this title will be used instead of the file name in the interface.
+
+To obtain sounds, I'd recommend the following process:
+
+1. Go on YouTube, and search for "white noise".
+2. Find a few different sounds you like, and download the audio for them with [youtube-dl](https://youtube-dl.org/).
+3. Use [Audacity](https://www.audacityteam.org/) to trim the audio file down to around 2 minutes or so.
+4. Export this new, trimmed audio as an Ogg file.
+5. During the export process, you will be given the option to enter a "Track Title" for the file. You can enter the name you would like for the sound in this field.
+6. Save this audio file in the `~/.whitenoiselinux/sounds` directory.
 
 ## Attributions
 
